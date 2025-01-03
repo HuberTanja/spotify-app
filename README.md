@@ -4,68 +4,72 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
-In the projekt ordner spotify-app 
+# Spotify API Integration
 
-### `npm start`
+This project demonstrates how to integrate with the Spotify API to authenticate users and fetch their playlists using Python and Flask.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Before running the project, make sure you have the following installed on your system:
 
-### `npm test`
+- **Python**: Version 3.7 or higher
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup Instructions
 
-### `npm run build`
+1. **Install Python**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   - Download Python from the [official website](https://www.python.org/downloads/).
+   - Follow the installation instructions for your operating system.
+   - Ensure Python is added to your system's PATH.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install Required Libraries**:
+   Run the following command to install the required Python libraries:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   pip install flask requests
+   ```
 
-### `npm run eject`
+3. **Set Up Spotify App Credentials**:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   - Create a new application in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
+   - Note the **Client ID** and **Client Secret**.
+   - Set the Redirect URI in the Spotify app settings to `http://localhost:5000/callback`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Running the Application
 
-## Learn More
+To start the server, run the following command:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+python3 main.py
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application will start on `http://localhost:5000`. Open this URL in your browser to access the app.
 
-### Code Splitting
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Login with Spotify**: Authenticate users through Spotify's OAuth 2.0 flow.
+- **Fetch User Playlists**: Retrieve and display the user's playlists.
+- **Token Refresh**: Automatically refreshes expired tokens using the Spotify API.
 
-### Analyzing the Bundle Size
+## Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Make sure your system clock is accurate; token expiration calculations depend on it.
+- Use `https` for the redirect URI in a production environment for better security.
 
-### Making a Progressive Web App
+## Troubleshooting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- If you encounter issues with Python or Flask, verify your Python installation with:
+  ```bash
+  python3 --version
+  ```
+- For dependency issues, try reinstalling the required libraries:
+  ```bash
+  pip install --force-reinstall flask requests
+  ```
 
-### Advanced Configuration
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is licensed under the MIT License.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

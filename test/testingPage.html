@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./style.css"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./card.js" defer></script>
+    <script src="./script.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-    <div class="AudioWaveBox">
+    <!-- this is the code part of the audio wave -->
+    <!-- <div class="AudioWaveBox">
         <p class="textInfoAudioWave">Animation für Audiowelle</p>
         <div class="music">
             <div class="bar"></div>
@@ -21,6 +26,17 @@
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
+    </div> -->
+
+    <!-- this is the code part of the tinder swipe mechanism -->
+    <!-- only thing missing here is:   -->
+        <!-- the spotify recommended song integration !!!-->
+        <!-- the part where spotify saves the liked songs (select the liked song) !!!!-->
+        <!-- the optimization for handy !!!!-->
+    <div class="swipeMechanism">
+        <ion-icon class="dislike" name="heart-dislike"></ion-icon>
+        <div id="swiper"></div>
+        <ion-icon class="like" name="heart"></ion-icon>
     </div>
 </body>
 </html>

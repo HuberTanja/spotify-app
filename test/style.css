@@ -12,78 +12,72 @@ body::-webkit-scrollbar {
 
 /* css part of the music wave */
 .music{
-    width: 400px;
-    height: 200px;
+    width: 10vw;
+    height: 1vh;
     position: relative;
+    top: -45vh;
+    left: 7vw;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;  
 }
-.AudioWaveBox{
-    border: black solid 2.5px;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    padding-left: 3vw;
-    padding-right: 3vw;
-}
-.textInfoAudioWave{
-    text-align: center;
-}
 .music .bar {
-    width: 12px;
+    height: 1vh;
+    width: 5px;
     border-radius: 10px;
     background-color: white;
     animation: movement 1.5s ease-in-out infinite;
 }
 /* wave animatione */
-@keyframes movement {
+@keyframes movement {   
     0%, 100% {
-        height: 2px;
+        height: 2px;  /* Hälfte von 2px */
     }
     50% {
-        height: 80px;
+        height: 40px;  /* Hälfte von 80px */
     }
 }
+
 /* styling the different parts of the audio wave */
 .music .bar:nth-child(1){
     background-color: black;
-    animation-delay: 1s;
+    animation-delay: 0.5s;  /* Hälfte von 1s */
 }
 .music .bar:nth-child(2){
     background-color: black;
-    animation-delay: .8s;
+    animation-delay: 0.4s;  /* Hälfte von 0.8s */
 }
 .music .bar:nth-child(3){
     background-color: black;
-    animation-delay: .6s;
+    animation-delay: 0.3s;  /* Hälfte von 0.6s */
 }
 .music .bar:nth-child(4){
     background-color: black;
-    animation-delay: .4s;
+    animation-delay: 0.2s;  /* Hälfte von 0.4s */
 }
 .music .bar:nth-child(5){
     background-color: black;
-    animation-delay: .2s;
+    animation-delay: 0.1s;  /* Hälfte von 0.2s */
 }
 .music .bar:nth-child(6){
     background-color: black;
-    animation-delay: .2s;
+    animation-delay: 0.1s;  /* Hälfte von 0.2s */
 }
 .music .bar:nth-child(7){
     background-color: black;
-    animation-delay: .4s;
+    animation-delay: 0.2s;  /* Hälfte von 0.4s */
 }
 .music .bar:nth-child(8){
     background-color: black;
-    animation-delay: .6s;
+    animation-delay: 0.3s;  /* Hälfte von 0.6s */
 }
 .music .bar:nth-child(9){
     background-color: black;
-    animation-delay: .8s;
+    animation-delay: 0.4s;  /* Hälfte von 0.8s */
 }
 .music .bar:nth-child(10){
     background-color: black;
-    animation-delay: 1s;
+    animation-delay: 0.5s;  /* Hälfte von 1s */
 }
 
 /* css part of the swipe mechanism */
@@ -112,11 +106,11 @@ body::-webkit-scrollbar {
 }
   
 .card img {
-    height: 36vh;
-    width: 18vw;
+    height: 30vh;
+    width: 15vw;
     border-radius: 30px;
     margin-top: 16vh;
-    margin-left: 3vw;
+    margin-left: 4.5vw;
     object-fit: cover;
     object-position: 50% 50%;
 }

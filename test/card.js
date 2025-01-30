@@ -1,10 +1,12 @@
 class Card {
   constructor({
+    artist,  // Neuer Parameter für den Künstlernamen
     imageUrl,
     onDismiss,
     onLike,
     onDislike
   }) {
+    this.artist = artist;  // Neue Eigenschaft für den Künstlernamen
     this.imageUrl = imageUrl;
     this.onDismiss = onDismiss;
     this.onLike = onLike;

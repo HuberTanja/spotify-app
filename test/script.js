@@ -4,12 +4,27 @@ const like = document.querySelector('#like');
 const dislike = document.querySelector('#dislike');
 
 // constants
-const urls = [
-  './img/gnx.jpeg',
-  './img/joji.jpeg',
-  './img/xxx.jpeg',
-  './img/still_woozy.jpeg',
-  './img/mac_miller.jpeg'
+const albumData = [
+  {
+    artist: "GNX",
+    coverUrl: "./img/gnx.jpeg"
+  },
+  {
+    artist: "Joji",
+    coverUrl: "./img/joji.jpeg"
+  },
+  {
+    artist: "XXXTentacion",
+    coverUrl: "./img/xxx.jpeg"
+  },
+  {
+    artist: "Still Woozy",
+    coverUrl: "./img/still_woozy.jpeg"
+  },
+  {
+    artist: "Mac Miller",
+    coverUrl: "./img/mac_miller.jpeg"
+  }
 ];
 
 // variables
@@ -18,12 +33,14 @@ let currentIndex = 0;
 // functions
 function appendNewCard() {
   // Reset index if we've reached the end of the array
-  if (currentIndex >= urls.length) {
+  if (currentIndex >= albumData.length) {
     currentIndex = 0;
   }
 
+  const currentAlbum = albumData[currentIndex];
   const card = new Card({
-    imageUrl: urls[currentIndex],
+    artist: currentAlbum.artist,
+    imageUrl: currentAlbum.coverUrl,
     onDismiss: loadNextCard,
     onLike: () => {
       like.style.animationPlayState = 'running';

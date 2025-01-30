@@ -7,23 +7,28 @@ const dislike = document.querySelector('#dislike');
 const albumData = [
   {
     artist: "Kendrick Lamar",
-    coverUrl: "./img/gnx.jpeg"
+    coverUrl: "./img/gnx.jpeg",
+    song: "Father Time (feat. Sampha)"
   },
   {
     artist: "Joji",
-    coverUrl: "./img/joji.jpeg"
+    coverUrl: "./img/joji.jpeg",
+    song: "Glimpse of Us"
   },
   {
     artist: "XXXTentacion",
-    coverUrl: "./img/xxx.jpeg"
+    coverUrl: "./img/xxx.jpeg",
+    song: "SAD!"
   },
   {
     artist: "Still Woozy",
-    coverUrl: "./img/still_woozy.jpeg"
+    coverUrl: "./img/still_woozy.jpeg",
+    song: "Goodie Bag"
   },
   {
     artist: "Mac Miller",
-    coverUrl: "./img/mac_miller.jpeg"
+    coverUrl: "./img/mac_miller.jpeg",
+    song: "Self Care"
   }
 ];
 
@@ -32,7 +37,6 @@ let currentIndex = 0;
 
 // functions
 function appendNewCard() {
-  // Reset index if we've reached the end of the array
   if (currentIndex >= albumData.length) {
     currentIndex = 0;
   }
@@ -40,6 +44,7 @@ function appendNewCard() {
   const currentAlbum = albumData[currentIndex];
   const card = new Card({
     artist: currentAlbum.artist,
+    song: currentAlbum.song,  // Übergeben des Songtitels
     imageUrl: currentAlbum.coverUrl,
     onDismiss: loadNextCard,
     onLike: () => {

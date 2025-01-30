@@ -1,12 +1,14 @@
 class Card {
   constructor({
-    artist,  // Neuer Parameter für den Künstlernamen
+    artist,
+    song,  // Neuer Parameter für den Songtitel
     imageUrl,
     onDismiss,
     onLike,
     onDislike
   }) {
-    this.artist = artist;  // Neue Eigenschaft für den Künstlernamen
+    this.artist = artist;
+    this.song = song;  // Neue Eigenschaft für den Songtitel
     this.imageUrl = imageUrl;
     this.onDismiss = onDismiss;
     this.onLike = onLike;
@@ -40,6 +42,21 @@ class Card {
     artistName.textContent = this.artist;
     albumCover.append(artistName);
 
+    // Hinzufügen des Songtitels
+    const songTitle = document.createElement('div');
+    songTitle.classList.add('song-title');
+    songTitle.textContent = this.song;
+    albumCover.append(songTitle);
+
+    const musicWave = document.createElement('div');
+    musicWave.classList.add('music');
+    for (let i = 0; i < 10; i++) {
+      const bar = document.createElement('div');
+      bar.classList.add('bar');
+      musicWave.appendChild(bar);
+    }
+    albumCover.append(musicWave);
+
     card.append(albumCover);
     this.element = card;
     this.albumCover = albumCover;
@@ -49,7 +66,6 @@ class Card {
       this.#listenToMouseEvents();
     }
   }
-
 
   #listenToTouchEvents = () => {
     this.albumCover.addEventListener('touchstart', (e) => {

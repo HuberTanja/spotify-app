@@ -17,11 +17,11 @@ body::-webkit-scrollbar {
   }
 
 /* css part of the music wave */
-.music{
+.music {
     width: 10vw;
     height: 1vh;
-    position: relative;
-    top: -45vh;
+    position: absolute;
+    top: 65vh;
     left: 7vw;
     display: inline-flex;
     align-items: center;
@@ -31,7 +31,7 @@ body::-webkit-scrollbar {
     height: 1vh;
     width: 5px;
     border-radius: 10px;
-    background-color: white;
+    background-color: black;
     animation: movement 1.5s ease-in-out infinite;
 }
 /* wave animatione */
@@ -44,12 +44,12 @@ body::-webkit-scrollbar {
     }
 }
 
-.artist-name{
+.artist-name, .song-title{
     font-size: 2.5vh;
     position: relative;
-    top: 17vh;
-    left: 8vw;
+    top: 3vh;
     font-family: Anton;
+    text-align: center;
 }
 
 /* styling the different parts of the audio wave */

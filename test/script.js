@@ -6,7 +6,7 @@ const dislike = document.querySelector('#dislike');
 // constants
 const albumData = [
   {
-    artist: "GNX",
+    artist: "Kendrick Lamar",
     coverUrl: "./img/gnx.jpeg"
   },
   {

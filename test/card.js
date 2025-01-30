@@ -33,6 +33,13 @@ class Card {
     const img = document.createElement('img');
     img.src = this.imageUrl;
     albumCover.append(img);
+
+    // Hinzufügen des Künstlernamens
+    const artistName = document.createElement('div');
+    artistName.classList.add('artist-name');
+    artistName.textContent = this.artist;
+    albumCover.append(artistName);
+
     card.append(albumCover);
     this.element = card;
     this.albumCover = albumCover;
@@ -42,6 +49,7 @@ class Card {
       this.#listenToMouseEvents();
     }
   }
+
 
   #listenToTouchEvents = () => {
     this.albumCover.addEventListener('touchstart', (e) => {

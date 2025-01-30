@@ -8,17 +8,17 @@ const albumData = [
   {
     artist: "Kendrick Lamar",
     coverUrl: "./img/gnx.jpeg",
-    song: "Father Time (feat. Sampha)"
+    song: "peekaboo (ft. azchike)"
   },
   {
     artist: "Joji",
     coverUrl: "./img/joji.jpeg",
-    song: "Glimpse of Us"
+    song: "Slow Dancing in the Dark"
   },
   {
     artist: "XXXTentacion",
     coverUrl: "./img/xxx.jpeg",
-    song: "SAD!"
+    song: "Teeth"
   },
   {
     artist: "Still Woozy",

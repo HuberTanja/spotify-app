@@ -5,21 +5,26 @@ const dislike = document.querySelector('#dislike');
 
 // constants
 const urls = [
-  'https://source.unsplash.com/random/1000x1000/?sky',
-  'https://source.unsplash.com/random/1000x1000/?landscape',
-  'https://source.unsplash.com/random/1000x1000/?ocean',
-  'https://source.unsplash.com/random/1000x1000/?moutain',
-  'https://source.unsplash.com/random/1000x1000/?forest'
+  './img/gnx.jpeg',
+  './img/joji.jpeg',
+  './img/xxx.jpeg',
+  './img/still_woozy.jpeg',
+  './img/mac_miller.jpeg'
 ];
 
 // variables
-let cardCount = 0;
+let currentIndex = 0;
 
 // functions
 function appendNewCard() {
+  // Reset index if we've reached the end of the array
+  if (currentIndex >= urls.length) {
+    currentIndex = 0;
+  }
+
   const card = new Card({
-    imageUrl: urls[cardCount % 5],
-    onDismiss: appendNewCard,
+    imageUrl: urls[currentIndex],
+    onDismiss: loadNextCard,
     onLike: () => {
       like.style.animationPlayState = 'running';
       like.classList.toggle('trigger');
@@ -30,15 +35,12 @@ function appendNewCard() {
     }
   });
   swiper.append(card.element);
-  cardCount++;
-
-  const cards = swiper.querySelectorAll('.card:not(.dismissing)');
-  cards.forEach((card, index) => {
-    card.style.setProperty('--i', index);
-  });
+  currentIndex++;
 }
 
-// first 5 cards
-for (let i = 0; i < 5; i++) {
+function loadNextCard() {
   appendNewCard();
 }
+
+// Load only the first card
+appendNewCard();

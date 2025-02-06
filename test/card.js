@@ -44,9 +44,49 @@ class Card {
 
     // Hinzufügen des Songtitels
     const songTitle = document.createElement('div');
-    songTitle.classList.add('song-title');
-    songTitle.textContent = this.song;
-    albumCover.append(songTitle);
+songTitle.classList.add('song-title');
+albumCover.append(songTitle);
+
+const createScrollingText = (text) => {
+  const scrollContainer = document.createElement('div');
+  scrollContainer.style.position = 'relative';
+  scrollContainer.style.width = '80%';
+  scrollContainer.style.marginLeft = '2vw';
+  scrollContainer.style.marginRight = '2vw';
+  scrollContainer.style.overflow = 'hidden';
+  scrollContainer.style.whiteSpace = 'nowrap';
+
+  const textSpan = document.createElement('span');
+  textSpan.textContent = text;
+  textSpan.style.display = 'inline-block';
+  textSpan.style.animation = 'none';
+
+  scrollContainer.appendChild(textSpan);
+  songTitle.appendChild(scrollContainer);
+
+  // Warten auf das Rendern des DOM
+  setTimeout(() => {
+    // hier kann man dann individuell die Länge des Strings angeben -> ab wann eine Scroll-Animation ausgeführt werden soll!!
+    if (text.length > 5) {
+      const duration = textSpan.offsetWidth / 30;
+      textSpan.style.animation = `scrollText ${duration}s linear infinite`;
+  
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes scrollText {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+      `;
+      document.head.appendChild(style);
+    } else {
+      // Zentrieren des Textes, wenn er nicht zu lang ist
+      scrollContainer.style.textAlign = 'center';
+    }
+  }, 0);
+};
+
+createScrollingText(this.song);
 
     const musicWave = document.createElement('div');
     musicWave.classList.add('music');

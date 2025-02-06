@@ -8,27 +8,27 @@ const albumData = [
   {
     artist: "Kendrick Lamar",
     coverUrl: "./img/gnx.jpeg",
-    song: "peekaboo (ft. azchike)"
+    song: "peekaboo - (Kendrick Lamar)"
   },
   {
     artist: "Joji",
     coverUrl: "./img/joji.jpeg",
-    song: "Slow Dancing in the Dark"
+    song: "Slow Dancing in the Dark - (Joji)"
   },
   {
     artist: "XXXTentacion",
     coverUrl: "./img/xxx.jpeg",
-    song: "Teeth"
+    song: "Teeth - (XXXTentacion)"
   },
   {
     artist: "Still Woozy",
     coverUrl: "./img/still_woozy.jpeg",
-    song: "Goodie Bag"
+    song: "Goodie Bag - (Still Woozy)"
   },
   {
     artist: "Mac Miller",
     coverUrl: "./img/mac_miller.jpeg",
-    song: "Self Care"
+    song: "Self Care - (Mac Miller)"
   }
 ];
 

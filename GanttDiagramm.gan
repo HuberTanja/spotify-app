@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2024-12-01" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3312" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-24" view-index="0" gantt-divider-location="354" resource-divider-location="300" version="3.3.3312" locale="de_DE">
     <description/>
-    <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="200" order="0"/>
+    <view zooming-state="default:5" id="gantt-chart">
+        <field id="tpd3" name="Vorgang" width="187" order="0"/>
         <field id="tpd4" name="Anfang" width="75" order="1"/>
         <field id="tpd5" name="Ende" width="75" order="2"/>
         <field id="tpd15" name="Notizen" width="20" order="3"/>
@@ -11,8 +11,8 @@
         <option id="filter.inProgressTodayTasks" value="false"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Ressource" width="210" order="0"/>
-        <field id="1" name="Rolle" width="86" order="1"/>
+        <field id="0" name="Ressource" width="209" order="0"/>
+        <field id="1" name="Rolle" width="85" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -38,27 +38,27 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" uid="7b7ed946584645fbacd3e280281e44a9" name="UX-UI Konzeption" meeting="false" start="2024-12-30" duration="42" complete="0" expand="false">
-            <task id="6" uid="b13e5e463c14496fb35250e52f6f64ef" name="Figma Prototyp" meeting="false" start="2025-01-17" duration="28" complete="0" expand="true">
+        <task id="0" uid="7b7ed946584645fbacd3e280281e44a9" name="UX-UI Konzeption" meeting="false" start="2024-12-30" duration="42" complete="100" expand="true">
+            <task id="6" uid="b13e5e463c14496fb35250e52f6f64ef" name="Figma Prototyp" meeting="false" start="2025-01-17" duration="28" complete="100" expand="true">
                 <depend id="11" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="7" uid="c84a888cec5f434ba9d84b577b2ea60f" name="Nutzeranforderungen analysieren" meeting="false" start="2024-12-30" duration="14" complete="0" expand="true">
+            <task id="7" uid="c84a888cec5f434ba9d84b577b2ea60f" name="Nutzeranforderungen analysieren" meeting="false" start="2024-12-30" duration="14" complete="100" expand="true">
                 <depend id="6" type="2" difference="0" hardness="Strong"/>
                 <depend id="11" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
         <task id="34" uid="4c785321763d4e68b309fc3dbcaadddf" name="UX/ UI Konzeption" meeting="true" start="2025-02-25" duration="0" complete="0" expand="true"/>
-        <task id="1" uid="7e126acaa89e4e8b8da71dbf971f55d6" name="API Konzeption" meeting="false" start="2024-12-30" duration="46" complete="0" expand="false">
-            <task id="8" uid="65c16ea6307a40c0960aa42fc5d1a50b" name="Spotify Dokumentation analysieren" meeting="false" start="2024-12-30" duration="28" complete="0" expand="true">
+        <task id="1" uid="7e126acaa89e4e8b8da71dbf971f55d6" name="API Konzeption" meeting="false" start="2024-12-30" duration="46" complete="100" expand="true">
+            <task id="8" uid="65c16ea6307a40c0960aa42fc5d1a50b" name="Spotify Dokumentation analysieren" meeting="false" start="2024-12-30" duration="28" complete="100" expand="true">
                 <depend id="11" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="9" uid="436440da21794df891573b7174a19813" name="Funktionale Anforderungen definieren" meeting="false" start="2025-02-12" duration="14" complete="0" expand="true">
+            <task id="9" uid="436440da21794df891573b7174a19813" name="Funktionale Anforderungen definieren" meeting="false" start="2025-02-12" duration="14" complete="100" expand="true">
                 <depend id="11" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
-        <task id="35" uid="504f4fda0c5b445b9b1849dc195f8c3e" name="API Konzeption" meeting="true" start="2025-03-03" duration="0" complete="0" expand="true"/>
-        <task id="10" uid="24a255a92d594a738854657eb18b4df6" name="Siwpe Mechanismus Design" meeting="false" start="2025-03-04" duration="35" complete="0" expand="false">
-            <task id="11" uid="c9eef223894d4607920ac0348409c37a" name="UX-UI für Swipen entwerfen" meeting="false" start="2025-03-04" duration="21" complete="0" expand="true">
+        <task id="35" uid="504f4fda0c5b445b9b1849dc195f8c3e" name="API Konzeption" meeting="true" start="2025-03-03" duration="0" complete="80" expand="true"/>
+        <task id="10" uid="24a255a92d594a738854657eb18b4df6" name="Siwpe Mechanismus Design" meeting="false" start="2025-03-04" duration="35" complete="54" expand="true">
+            <task id="11" uid="c9eef223894d4607920ac0348409c37a" name="UX-UI für Swipen entwerfen" meeting="false" start="2025-03-04" duration="21" complete="90" expand="true">
                 <depend id="12" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="12" uid="7a9787d79440442eaeae664fae3bb388" name="vlt. Libary- Auswahl" meeting="false" start="2025-04-02" duration="14" complete="0" expand="true">
@@ -75,11 +75,11 @@
             </task>
         </task>
         <task id="37" uid="f8a787913fb54bf8996c78b7644949fd" name="Frontend-Entwicklung" meeting="true" start="2025-06-09" duration="0" complete="0" expand="true"/>
-        <task id="15" uid="8a2ea6963aef434c83512343a17996a4" name="Backend_Integration" meeting="false" start="2024-12-30" duration="42" complete="0" expand="false">
-            <task id="16" uid="6e6ac9ea498842c8a208b9f6f33e9489" name="Sptify-API einbindung" meeting="false" start="2024-12-30" duration="21" complete="0" expand="true">
+        <task id="15" uid="8a2ea6963aef434c83512343a17996a4" name="Backend_Integration" meeting="false" start="2024-12-30" duration="42" complete="57" expand="true">
+            <task id="16" uid="6e6ac9ea498842c8a208b9f6f33e9489" name="Sptify-API einbindung" meeting="false" start="2024-12-30" duration="21" complete="85" expand="true">
                 <depend id="17" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="17" uid="b495d4bb89134808920482a5deb2b0ac" name="Playlistzugriff und Songdaten integrieren" meeting="false" start="2025-01-28" duration="21" complete="0" expand="true">
+            <task id="17" uid="b495d4bb89134808920482a5deb2b0ac" name="Playlistzugriff und Songdaten integrieren" meeting="false" start="2025-01-28" duration="21" complete="30" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>

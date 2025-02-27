@@ -36,37 +36,37 @@ class Card {
     img.src = this.imageUrl;
     albumCover.append(img);
 
+    // Hinzufügen des Songtitels
+    const songTitle = document.createElement('div');
+    songTitle.classList.add('song-title');
+    albumCover.append(songTitle);
+
     // Hinzufügen des Künstlernamens
     const artistName = document.createElement('div');
     artistName.classList.add('artist-name');
     artistName.textContent = this.artist;
     albumCover.append(artistName);
 
-    // Hinzufügen des Songtitels
-    const songTitle = document.createElement('div');
-songTitle.classList.add('song-title');
-albumCover.append(songTitle);
-
 const createScrollingText = (text) => {
-  const scrollContainer = document.createElement('div');
-  scrollContainer.style.position = 'relative';
-  scrollContainer.style.width = '80%';
-  scrollContainer.style.marginLeft = '2vw';
-  scrollContainer.style.marginRight = '2vw';
-  scrollContainer.style.overflow = 'hidden';
-  scrollContainer.style.whiteSpace = 'nowrap';
+const scrollContainer = document.createElement('div');
+scrollContainer.style.position = 'relative';
+scrollContainer.style.width = '80%';
+scrollContainer.style.marginLeft = '2vw';
+scrollContainer.style.marginRight = '2vw';
+scrollContainer.style.overflow = 'hidden';
+scrollContainer.style.whiteSpace = 'nowrap';
 
-  const textSpan = document.createElement('span');
-  textSpan.textContent = text;
-  textSpan.style.display = 'inline-block';
-  textSpan.style.animation = 'none';
+const textSpan = document.createElement('span');
+textSpan.textContent = text;
+textSpan.style.display = 'inline-block';
+textSpan.style.animation = 'none';
 
-  scrollContainer.appendChild(textSpan);
-  songTitle.appendChild(scrollContainer);
+scrollContainer.appendChild(textSpan);
+songTitle.appendChild(scrollContainer);
 
   // Warten auf das Rendern des DOM
   setTimeout(() => {
-    // hier kann man dann individuell die Länge des Strings angeben -> ab wann eine Scroll-Animation ausgeführt werden soll!!
+    // hier kann man dann individuell die Länge des Strings angeben -> ab wann eine Scroll-Animation ausgeführt werden
     if (text.length > 5) {
       const duration = textSpan.offsetWidth / 30;
       textSpan.style.animation = `scrollText ${duration}s linear infinite`;

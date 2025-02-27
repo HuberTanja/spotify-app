@@ -66,3 +66,19 @@ function loadNextCard() {
 
 // Load only the first card
 appendNewCard();
+
+function swipeRight(cardElement) {
+  cardElement.style.transition = 'transform 1s';
+  cardElement.style.transform = `translate(${window.innerWidth}px, 0) rotate(90deg)`;
+  setTimeout(() => {
+    cardElement.remove(); // Entfernt die Karte nach der Animation
+  }, 1000);
+}
+
+function swipeLeft(cardElement) {
+  cardElement.style.transition = 'transform 1s';
+  cardElement.style.transform = `translate(-${window.innerWidth}px, 0) rotate(-90deg)`;
+  setTimeout(() => {
+    cardElement.remove(); // Entfernt die Karte nach der Animation
+  }, 1000);
+}

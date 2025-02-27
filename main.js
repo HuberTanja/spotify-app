@@ -94,32 +94,43 @@ app.get('/callback', async (req, res) => {
 });
 
 app.get('/playlists', async (req, res) => {
-    /*
-    Ruft die Playlists des angemeldeten Benutzers ab.
-    */
     if (!req.session.access_token) {
-        // Leitet zur Anmeldung weiter, wenn kein Access-Token vorhanden ist
         return res.redirect('/login');
     }
-    
+
     if ((Date.now() / 1000) > req.session.expires_at) {
-        // Wenn das Token abgelaufen ist, wird es erneuert
         return res.redirect('/refresh-token');
     }
-    
+
     const headers = {
-        'Authorization': `Bearer ${req.session.access_token}`  // Authentifizierung mit Access-Token
+        'Authorization': `Bearer ${req.session.access_token}`
     };
-    
-    // Anfrage an die Spotify API zum Abrufen der Benutzer-Playlists
-    const response = await fetch(API_BASE_URL + 'me/playlists', { headers });
-    if (response.status !== 200) {
-        const errorDetails = await response.json();
-        return res.json({ error: "Failed to fetch playlists", details: errorDetails });
+
+    try {
+        // Benutzerprofil abrufen
+        const response = await fetch(API_BASE_URL + 'me', { headers });
+        if (response.status !== 200) {
+            const errorDetails = await response.json();
+            return res.json({ error: "Failed to fetch user profile", details: errorDetails });
+        }
+
+        const userData = await response.json();
+        console.log(userData); // Profil-Daten in der Konsole ausgeben
+
+        // Playlists abrufen
+        const playlistResponse = await fetch(API_BASE_URL + 'me/playlists', { headers });
+        if (playlistResponse.status !== 200) {
+            const playlistError = await playlistResponse.json();
+            return res.json({ error: "Failed to fetch playlists", details: playlistError });
+        }
+
+        const playlists = await playlistResponse.json();
+
+        // Beides zurückgeben
+        res.json({ user: userData, playlists: playlists });
+    } catch (error) {
+        res.json({ error: "An error occurred", details: error.message });
     }
-    
-    const playlists = await response.json();
-    return res.json(playlists);  // Gibt die Playlists als JSON zurück
 });
 
 app.get('/refresh-token', async (req, res) => {

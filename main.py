@@ -99,6 +99,7 @@ def get_playlists():
 
     playlists = response.json()
     return jsonify(playlists)  # Gibt die Playlists als JSON zurück
+ 
 
 @app.route('/refresh-token')
 def refresh_token():

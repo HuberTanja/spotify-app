@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-24" view-index="0" gantt-divider-location="354" resource-divider-location="300" version="3.3.3312" locale="de_DE">
+    <description/>
+    <view zooming-state="default:5" id="gantt-chart">
+        <field id="tpd3" name="Vorgang" width="187" order="0"/>
+        <field id="tpd4" name="Anfang" width="75" order="1"/>
+        <field id="tpd5" name="Ende" width="75" order="2"/>
+        <field id="tpd15" name="Notizen" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Ressource" width="209" order="0"/>
+        <field id="1" name="Rolle" width="85" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="7b7ed946584645fbacd3e280281e44a9" name="UX-UI Konzeption" meeting="false" start="2024-12-30" duration="42" complete="100" expand="true">
+            <task id="6" uid="b13e5e463c14496fb35250e52f6f64ef" name="Figma Prototyp" meeting="false" start="2025-01-17" duration="28" complete="100" expand="true">
+                <depend id="11" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="7" uid="c84a888cec5f434ba9d84b577b2ea60f" name="Nutzeranforderungen analysieren" meeting="false" start="2024-12-30" duration="14" complete="100" expand="true">
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+                <depend id="11" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="34" uid="4c785321763d4e68b309fc3dbcaadddf" name="UX/ UI Konzeption" meeting="true" start="2025-02-25" duration="0" complete="0" expand="true"/>
+        <task id="1" uid="7e126acaa89e4e8b8da71dbf971f55d6" name="API Konzeption" meeting="false" start="2024-12-30" duration="46" complete="100" expand="true">
+            <task id="8" uid="65c16ea6307a40c0960aa42fc5d1a50b" name="Spotify Dokumentation analysieren" meeting="false" start="2024-12-30" duration="28" complete="100" expand="true">
+                <depend id="11" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="9" uid="436440da21794df891573b7174a19813" name="Funktionale Anforderungen definieren" meeting="false" start="2025-02-12" duration="14" complete="100" expand="true">
+                <depend id="11" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="35" uid="504f4fda0c5b445b9b1849dc195f8c3e" name="API Konzeption" meeting="true" start="2025-03-03" duration="0" complete="80" expand="true"/>
+        <task id="10" uid="24a255a92d594a738854657eb18b4df6" name="Siwpe Mechanismus Design" meeting="false" start="2025-03-04" duration="35" complete="54" expand="true">
+            <task id="11" uid="c9eef223894d4607920ac0348409c37a" name="UX-UI für Swipen entwerfen" meeting="false" start="2025-03-04" duration="21" complete="90" expand="true">
+                <depend id="12" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="12" uid="7a9787d79440442eaeae664fae3bb388" name="vlt. Libary- Auswahl" meeting="false" start="2025-04-02" duration="14" complete="0" expand="true">
+                <depend id="13" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="36" uid="b275e76013eb4e5bbad3e2517e0dd613" name="Swipe Mechanismus Design" meeting="true" start="2025-04-21" duration="0" complete="0" expand="true"/>
+        <task id="3" uid="ac744bae22fb4101a060de06f30a95db" name="Frontend-Entwicklung" meeting="false" start="2025-04-28" duration="31" complete="0" expand="false">
+            <task id="13" uid="d57f67bfb3f04098bbcfbb2f6fb71ca4" name="Design mittels HTML, CSS, JS implementieren" meeting="false" start="2025-04-28" duration="20" complete="0" thirdDate="2025-04-28" thirdDate-constraint="1" expand="true">
+                <depend id="14" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="14" uid="c26cb6c2dc8442a79809a7ebaec5ce02" name="App für mobile Nutzung" meeting="false" start="2025-05-27" duration="10" complete="0" thirdDate="2025-05-20" thirdDate-constraint="1" expand="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="37" uid="f8a787913fb54bf8996c78b7644949fd" name="Frontend-Entwicklung" meeting="true" start="2025-06-09" duration="0" complete="0" expand="true"/>
+        <task id="15" uid="8a2ea6963aef434c83512343a17996a4" name="Backend_Integration" meeting="false" start="2024-12-30" duration="42" complete="57" expand="true">
+            <task id="16" uid="6e6ac9ea498842c8a208b9f6f33e9489" name="Sptify-API einbindung" meeting="false" start="2024-12-30" duration="21" complete="85" expand="true">
+                <depend id="17" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="17" uid="b495d4bb89134808920482a5deb2b0ac" name="Playlistzugriff und Songdaten integrieren" meeting="false" start="2025-01-28" duration="21" complete="30" expand="true">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="38" uid="47b384203e6a4a80970a93cb8ea624c3" name="Backend-Integration" meeting="true" start="2025-02-25" duration="0" complete="0" expand="true"/>
+        <task id="18" uid="87a6a597c361472581d784f7ea9558ff" name="Swipe-Mechanismus" meeting="false" start="2025-02-26" duration="20" complete="4" expand="false">
+            <task id="19" uid="307f9c1fad49454a8d4785c0028c34c5" name="Click-Event integrieren" meeting="false" start="2025-02-26" duration="10" complete="0" thirdDate="2025-02-25" thirdDate-constraint="1" expand="true">
+                <depend id="20" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="33" uid="02c0b7c4ebc44268b879955f88b7c7d4" name="Swipefunktion - Playlistspeicherung" meeting="false" start="2025-03-12" duration="10" complete="0" expand="true"/>
+            <task id="20" uid="0dcc653b860446a98dda65b2946aa105" name="Swipen testen und Debuggen" meeting="false" start="2025-03-13" duration="1" complete="100" thirdDate="2025-03-13" thirdDate-constraint="1" expand="true">
+                <depend id="22" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="39" uid="82596f723aa247de90a88201a9335707" name="Swipe Mechanismus" meeting="true" start="2025-03-25" duration="0" complete="0" expand="true"/>
+        <task id="21" uid="2c05144603c642369b8adf76bc25ff59" name="Designfinalisierung" meeting="false" start="2025-03-14" duration="28" complete="0" expand="false">
+            <task id="22" uid="4918745846ac4ba6b2899b4b2692bf49" name="Visuelle Elemente anpassen" meeting="false" start="2025-03-14" duration="14" complete="0" thirdDate="2025-03-14" thirdDate-constraint="1" expand="true">
+                <depend id="24" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="24" uid="81d44002e14e49cebb368b2192393ad2" name="Responsive Design überprüfen" meeting="false" start="2025-04-03" duration="14" complete="0" thirdDate="2025-04-01" thirdDate-constraint="1" expand="true">
+                <depend id="26" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="40" uid="cf9dd820d7844f1e96ada68e76de4d01" name="Desingfinalisierung" meeting="true" start="2025-04-22" duration="0" complete="0" expand="true"/>
+        <task id="25" uid="6778f6fdfb384635bf5564961b99cb32" name="Testphase" meeting="false" start="2025-04-23" duration="24" complete="0" expand="false">
+            <task id="26" uid="e3a410d6e6ec446593b6cb6e62c23996" name="Feedback für Testprogramm analysieren" meeting="false" start="2025-04-23" duration="12" complete="0" thirdDate="2025-04-21" thirdDate-constraint="1" expand="true">
+                <depend id="27" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="27" uid="8820ad8c6ff24cd4bc7ec6182817bd5d" name="Fehler beheben und optimieren" meeting="false" start="2025-05-09" duration="12" complete="0" thirdDate="2025-05-07" thirdDate-constraint="1" expand="true">
+                <depend id="14" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="41" uid="9ba09c9904c7426eb18fd6a124ff842a" name="Testphase" meeting="true" start="2025-05-26" duration="0" complete="0" expand="true"/>
+        <task id="28" uid="fd8412ab977e45a5a1ad3b5d062b372d" name="Adgabe" meeting="false" start="2025-06-10" duration="9" complete="0" expand="true">
+            <task id="29" uid="70f7f3a52f9548258a885e35d4c5116d" name="Projektdokumentattion erstellen" meeting="false" start="2025-06-10" duration="5" complete="0" expand="true">
+                <depend id="30" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="30" uid="24ac8d26314f40c795af6a4eb498b50d" name="App-Vorstellung" meeting="false" start="2025-06-17" duration="4" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Wanson Björn" function="SoftwareDevelopment:9" contacts="b.wanson@htblaleonding.onmicrosoft.ac.at" phone="06643530585"/>
+        <resource id="1" name="Hörtenhuber Simeon" function="SoftwareDevelopment:2" contacts="s.hoertenhuber@htblaleonding.onmicrosoft.com " phone="0680 2453465"/>
+        <resource id="2" name="Binder Dominik" function="Default:1" contacts="d.binder@htblaleonding.onmicrosoft.com" phone="+43 677 62452801"/>
+        <resource id="3" name="Hochhuber Tanja" function="SoftwareDevelopment:2" contacts="t.hochhuber@htblaleonding.onmicrosoft.com" phone="067762560029"/>
+    </resources>
+    <allocations>
+        <allocation task-id="6" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="11" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="12" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="13" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="19" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="22" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="24" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="27" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="26" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="0" function="SoftwareDevelopment:9" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="16" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="27" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="26" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="6" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="11" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="12" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="13" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="19" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="22" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="24" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="27" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="26" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="2" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="16" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="27" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="26" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="29" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+        <allocation task-id="30" resource-id="3" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

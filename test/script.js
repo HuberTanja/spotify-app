@@ -4,22 +4,49 @@ const like = document.querySelector('#like');
 const dislike = document.querySelector('#dislike');
 
 // constants
-const urls = [
-  'https://source.unsplash.com/random/1000x1000/?sky',
-  'https://source.unsplash.com/random/1000x1000/?landscape',
-  'https://source.unsplash.com/random/1000x1000/?ocean',
-  'https://source.unsplash.com/random/1000x1000/?moutain',
-  'https://source.unsplash.com/random/1000x1000/?forest'
+const albumData = [
+  {
+    artist: "Kendrick Lamar",
+    coverUrl: "./img/gnx.jpeg",
+    song: "peekaboo - (Kendrick Lamar)"
+  },
+  {
+    artist: "Joji",
+    coverUrl: "./img/joji.jpeg",
+    song: "Slow Dancing in the Dark - (Joji)"
+  },
+  {
+    artist: "XXXTentacion",
+    coverUrl: "./img/xxx.jpeg",
+    song: "Teeth - (XXXTentacion)"
+  },
+  {
+    artist: "Still Woozy",
+    coverUrl: "./img/still_woozy.jpeg",
+    song: "Goodie Bag - (Still Woozy)"
+  },
+  {
+    artist: "Mac Miller",
+    coverUrl: "./img/mac_miller.jpeg",
+    song: "Self Care - (Mac Miller)"
+  }
 ];
 
 // variables
-let cardCount = 0;
+let currentIndex = 0;
 
 // functions
 function appendNewCard() {
+  if (currentIndex >= albumData.length) {
+    currentIndex = 0;
+  }
+
+  const currentAlbum = albumData[currentIndex];
   const card = new Card({
-    imageUrl: urls[cardCount % 5],
-    onDismiss: appendNewCard,
+    artist: currentAlbum.artist,
+    song: currentAlbum.song,  // Übergeben des Songtitels
+    imageUrl: currentAlbum.coverUrl,
+    onDismiss: loadNextCard,
     onLike: () => {
       like.style.animationPlayState = 'running';
       like.classList.toggle('trigger');
@@ -30,15 +57,28 @@ function appendNewCard() {
     }
   });
   swiper.append(card.element);
-  cardCount++;
-
-  const cards = swiper.querySelectorAll('.card:not(.dismissing)');
-  cards.forEach((card, index) => {
-    card.style.setProperty('--i', index);
-  });
+  currentIndex++;
 }
 
-// first 5 cards
-for (let i = 0; i < 5; i++) {
+function loadNextCard() {
   appendNewCard();
+}
+
+// Load only the first card
+appendNewCard();
+
+function swipeRight(cardElement) {
+  cardElement.style.transition = 'transform 1s';
+  cardElement.style.transform = `translate(${window.innerWidth}px, 0) rotate(90deg)`;
+  setTimeout(() => {
+    cardElement.remove(); // Entfernt die Karte nach der Animation
+  }, 1000);
+}
+
+function swipeLeft(cardElement) {
+  cardElement.style.transition = 'transform 1s';
+  cardElement.style.transform = `translate(-${window.innerWidth}px, 0) rotate(-90deg)`;
+  setTimeout(() => {
+    cardElement.remove(); // Entfernt die Karte nach der Animation
+  }, 1000);
 }

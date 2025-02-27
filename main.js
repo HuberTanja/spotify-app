@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const fetch = require('node-fetch');  // Install via: npm install node-fetch
 const { URLSearchParams } = require('url');
+import fetch from 'node-fetch';
 
 const app = express();
 
@@ -13,9 +15,10 @@ app.use(session({
 }));
 
 // Spotify API-Konfigurationsvariablen
-const CLIENT_ID = '2fe3ce085edc4366a2f227b368baa7e3';  // Client-ID der Spotify-App
-const CLIENT_SECRET = '6c264ec7f8f44c5ca7b7a62b9e0562f4';  // Client-Secret der Spotify-App
-const REDIRECT_URI = 'http://localhost:5000/callback';  // URI, auf die nach Authentifizierung weitergeleitet wird
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+
 
 // Spotify API-Endpunkte
 const AUTH_URL = 'https://accounts.spotify.com/authorize';  // URL für die Benutzeranmeldung

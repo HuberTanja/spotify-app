@@ -47,22 +47,22 @@ class Card {
     artistName.textContent = this.artist;
     albumCover.append(artistName);
 
-const createScrollingText = (text) => {
-const scrollContainer = document.createElement('div');
-scrollContainer.style.position = 'relative';
-scrollContainer.style.width = '80%';
-scrollContainer.style.marginLeft = '2vw';
-scrollContainer.style.marginRight = '2vw';
-scrollContainer.style.overflow = 'hidden';
-scrollContainer.style.whiteSpace = 'nowrap';
+  const createScrollingText = (text) => {
+  const scrollContainer = document.createElement('div');
+  scrollContainer.style.position = 'relative';
+  scrollContainer.style.width = '80%';
+  scrollContainer.style.marginLeft = '2vw';
+  scrollContainer.style.marginRight = '2vw';
+  scrollContainer.style.overflow = 'hidden';
+  scrollContainer.style.whiteSpace = 'nowrap';
 
-const textSpan = document.createElement('span');
-textSpan.textContent = text;
-textSpan.style.display = 'inline-block';
-textSpan.style.animation = 'none';
+  const textSpan = document.createElement('span');
+  textSpan.textContent = text;
+  textSpan.style.display = 'inline-block';
+  textSpan.style.animation = 'none';
 
-scrollContainer.appendChild(textSpan);
-songTitle.appendChild(scrollContainer);
+  scrollContainer.appendChild(textSpan);
+  songTitle.appendChild(scrollContainer);
 
   // Warten auf das Rendern des DOM
   setTimeout(() => {

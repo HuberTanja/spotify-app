@@ -1,19 +1,19 @@
 class Card {
   constructor({
-      artist,
-      song,
-      imageUrl,
-      onDismiss,
-      onLike,
-      onDislike
+    artist,
+    song,
+    imageUrl,
+    onDismiss,
+    onLike,
+    onDislike
   }) {
-      this.artist = artist;
-      this.song = song;
-      this.imageUrl = imageUrl;
-      this.onDismiss = onDismiss;
-      this.onLike = onLike;
-      this.onDislike = onDislike;
-      this.#init();
+    this.artist = artist;
+    this.song = song;
+    this.imageUrl = imageUrl;
+    this.onDismiss = onDismiss;
+    this.onLike = onLike;
+    this.onDislike = onDislike;
+    this.#init();
   }
 
   // private properties
@@ -46,6 +46,22 @@ class Card {
       artistName.classList.add('artist-name');
       artistName.textContent = this.artist;
       albumCover.append(artistName);
+
+      const buttonContainer = document.createElement('div');
+      buttonContainer.classList.add('button-container');
+
+      const likeButton = document.createElement('button');
+      likeButton.textContent = 'Like';
+      likeButton.addEventListener('click', () => this.swipe(1));
+
+      const dislikeButton = document.createElement('button');
+      dislikeButton.textContent = 'Dislike';
+      dislikeButton.addEventListener('click', () => this.swipe(-1));
+
+      buttonContainer.appendChild(dislikeButton);
+      buttonContainer.appendChild(likeButton);
+
+      card.appendChild(buttonContainer);
 
       const createScrollingText = (text) => {
           const scrollContainer = document.createElement('div');
@@ -102,6 +118,17 @@ class Card {
       } else {
           this.#listenToMouseEvents();
       }
+  }
+
+  swipe(direction) {
+    // Reset any ongoing transitions or transformations
+    this.albumCover.style.transition = '';
+    this.albumCover.style.transform = '';
+
+    // Trigger the dismiss animation on the next frame
+    requestAnimationFrame(() => {
+      this.#dismiss(direction);
+    });
   }
 
   #listenToTouchEvents = () => {
@@ -171,29 +198,28 @@ class Card {
   }
 
   #dismiss = (direction) => {
-      this.#startPoint = null;
-      document.removeEventListener('mouseup', this.#handleMoveUp);
-      document.removeEventListener('mousemove', this.#handleMouseMove);
-      document.removeEventListener('touchend', this.#handleTouchEnd);
-      document.removeEventListener('touchmove', this.#handleTouchMove);
-      this.albumCover.style.transition = 'transform 1s';
-      this.albumCover.style.transform = `translate(${direction * window.innerWidth}px, ${this.#offsetY}px) rotate(${90 * direction}deg)`;
-      this.albumCover.classList.add('dismissing');
-      setTimeout(() => {
-          this.element.remove();
-      }, 1000);
-      if (typeof this.onDismiss === 'function') {
-          this.onDismiss();
-      }
-      if (typeof this.onLike === 'function' && direction === 1) {
-          this.onLike();
-      }
-      if (typeof this.onDislike === 'function' && direction === -1) {
-          this.onDislike();
-      }
-  }
-
-  swipe(direction) {
-      this.#dismiss(direction);
+    this.#startPoint = null;
+    document.removeEventListener('mouseup', this.#handleMoveUp);
+    document.removeEventListener('mousemove', this.#handleMouseMove);
+    document.removeEventListener('touchend', this.#handleTouchEnd);
+    document.removeEventListener('touchmove', this.#handleTouchMove);
+    
+    this.albumCover.style.transition = 'transform 1s';
+    this.albumCover.style.transform = `translate(${direction * window.innerWidth}px, ${this.#offsetY || 0}px) rotate(${90 * direction}deg)`;
+    this.albumCover.classList.add('dismissing');
+    
+    setTimeout(() => {
+      this.element.remove();
+    }, 1000);
+    
+    if (typeof this.onDismiss === 'function') {
+      this.onDismiss();
+    }
+    if (typeof this.onLike === 'function' && direction === 1) {
+      this.onLike();
+    }
+    if (typeof this.onDislike === 'function' && direction === -1) {
+      this.onDislike();
+    }
   }
 }

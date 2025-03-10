@@ -48,19 +48,28 @@ class Card {
       albumCover.append(artistName);
 
       const buttonContainer = document.createElement('div');
-      buttonContainer.classList.add('button-container');
+        buttonContainer.classList.add('button-container');
 
-      const likeButton = document.createElement('button');
-      likeButton.textContent = 'Like';
-      likeButton.addEventListener('click', () => this.swipe(1));
+        const likeButton = document.createElement('button');
+        likeButton.classList.add('like-button');
+        const likeImg = document.createElement('img');
+        likeImg.src = '../design/Icons/HeartGreen.png';
+        likeImg.alt = 'Like';
+        likeButton.appendChild(likeImg);
+        likeButton.addEventListener('click', () => this.swipe(1));
 
-      const dislikeButton = document.createElement('button');
-      dislikeButton.textContent = 'Dislike';
-      dislikeButton.addEventListener('click', () => this.swipe(-1));
+        const dislikeButton = document.createElement('button');
+        dislikeButton.classList.add('dislike-button');
+        const dislikeImg = document.createElement('img');
+        dislikeImg.src = '../design/Icons/HeartRed.png';
+        dislikeImg.alt = 'Dislike';
+        dislikeButton.appendChild(dislikeImg);
+        dislikeButton.addEventListener('click', () => this.swipe(-1));
 
-      buttonContainer.appendChild(dislikeButton);
-      buttonContainer.appendChild(likeButton);
+        buttonContainer.appendChild(dislikeButton);
+        buttonContainer.appendChild(likeButton);
 
+card.appendChild(buttonContainer);
       card.appendChild(buttonContainer);
 
       const createScrollingText = (text) => {

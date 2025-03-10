@@ -159,6 +159,35 @@ body::-webkit-scrollbar {
     background-color: rgba(0, 0, 0, 0.5);
 }
   
+.like-button{
+    scale: 0.5;
+    z-index: 5;
+    position: absolute;
+    top: 56vh;
+    left: 7vw;
+    transform: scaleX(-1);
+    background: transparent;
+    border: none; 
+    outline: none;
+}
+
+.dislike-button{
+    scale: 0.5;
+    z-index: 5;
+    position: absolute;
+    top: 56vh;
+    left: -5vw;
+    background: transparent;
+    border: none; 
+    outline: none;
+}
+
+.dislike-button:hover, .like-button:hover {
+    cursor: default;
+    scale: 0.57;
+    transition: all 3s;
+}
+
 @keyframes animation1 {
   
     0%,

@@ -2,18 +2,29 @@
 session_start();
 
 // Spotify API-Konfigurationsvariablen
-//define('CLIENT_ID', 'fab74cdcb301498fa075bc0af97e9cce');
 define('CLIENT_ID', '2fe3ce085edc4366a2f227b368baa7e3');
-//define('CLIENT_SECRET', '712fe9cde1944d55bbdcf3f146e69d00');
 define('CLIENT_SECRET', '6c264ec7f8f44c5ca7b7a62b9e0562f4');
 define('REDIRECT_URI', 'http://localhost:8080/spotify-app/index.php?action=callback');
 define('AUTH_URL', 'https://accounts.spotify.com/authorize');
 define('TOKEN_URL', 'https://accounts.spotify.com/api/token');
 define('API_BASE_URL', 'https://api.spotify.com/v1/');
 
-// Startseite
+// Startseite mit Login-Link
 if (sizeof($_GET) == 0) {
-    echo "Welcome to my Spotify App <a href='?action=login'>Login with Spotify</a>";
+    ?>
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Spotify App</title>
+    </head>
+    <body>
+        <h1>Willkommen bei der Spotify App</h1>
+        <p><a href="?action=login">Login mit Spotify</a></p>
+    </body>
+    </html>
+    <?php
     exit;
 }
 
@@ -62,51 +73,73 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
         header("Location: ?action=refresh-token");
         exit;
     }
-    
+
     $playlists = apiRequest('me/playlists');
-    echo json_encode($playlists);
+
+    ?>
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deine Spotify Playlists</title>
+    </head>
+    <body>
+        <h1>Deine Playlists</h1>
+        <ul>
+            <?php foreach ($playlists['items'] as $playlist): ?>
+                <li>
+                    <a href="?action=playlist&id=<?= $playlist['id'] ?>">
+                        <?= htmlspecialchars($playlist['name']) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </body>
+    </html>
+    <?php
     exit;
 }
 
-// Playlist abrufen
-/*if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
-    if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
-        header("Location: ?action=refresh-token");
-        exit;
-    }
-    
-    if (!isset($_GET['id'])) {
-        echo json_encode(["error" => "No playlist ID provided"]);
-        exit;
-    }
-    
-    $playlist = apiRequest('playlists/' . $_GET['id']);
-    echo json_encode($playlist);
-    
-    exit;
-}*/
-// Playlist abrufen
+// Einzelne Playlist abrufen
 if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
         header("Location: ?action=refresh-token");
         exit;
     }
     
-    // Überprüfe, ob eine Playlist-ID übergeben wurde
     if (!isset($_GET['id'])) {
         echo json_encode(["error" => "No playlist ID provided"]);
         exit;
     }
     
-    // Hole die Playlist mit der ID aus den GET-Parametern
     $playlist_id = $_GET['id'];
     $playlist = apiRequest('playlists/' . $playlist_id);
-    
-    // Gebe die Playlist-Daten zurück
-    echo json_encode($playlist);
+
+    ?>
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?= htmlspecialchars($playlist['name']) ?></title>
+    </head>
+    <body>
+        <h1><?= htmlspecialchars($playlist['name']) ?></h1>
+        <ul>
+            <?php foreach ($playlist['tracks']['items'] as $track): ?>
+                <li>
+                    <?= htmlspecialchars($track['track']['name']) ?> – 
+                    <?= htmlspecialchars($track['track']['artists'][0]['name']) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
+    </body>
+    </html>
+    <?php
     exit;
 }
-
 
 // Token erneuern
 if (isset($_GET['action']) && $_GET['action'] == 'refresh-token') {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Playlists</title>
+</head>
+<body>
+    <h1>Meine Spotify Playlists</h1>
+    <div id="playlists"></div>
+
+    <script>
+        // API-Antwort, die du erhalten hast (dies wäre normalerweise dynamisch via Fetch oder Ajax)
+        const response = {
+            "href": "https://api.spotify.com/v1/users/bcpjkynbeutrwmeywd4jzcwjn/playlists?offset=0&limit=50",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 16,
+            "items": [
+                {
+                    "collaborative": false,
+                    "description": "Playlist created by the tutorial on developer.spotify.com",
+                    "external_urls": {"spotify": "https://open.spotify.com/playlist/7IUUB0E66WPbNGxIarxNzH"},
+                    "href": "https://api.spotify.com/v1/playlists/7IUUB0E66WPbNGxIarxNzH",
+                    "id": "7IUUB0E66WPbNGxIarxNzH",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://mosaic.scdn.co/640/ab67616d00001e021917a0f3f4152622a040913fab67616d00001e0230dd807174572291941aea5aab67616d00001e028b065a7bfff7655a18bc18edab67616d00001e02c4c8f9e79bef311add3b8728",
+                            "width": 640
+                        }
+                    ],
+                    "name": "My recommendation playlist",
+                    "owner": {
+                        "display_name": "Tanja",
+                        "external_urls": {"spotify": "https://open.spotify.com/user/bcpjkynbeutrwmeywd4jzcwjn"},
+                        "href": "https://api.spotify.com/v1/users/bcpjkynbeutrwmeywd4jzcwjn",
+                        "id": "bcpjkynbeutrwmeywd4jzcwjn",
+                        "type": "user",
+                        "uri": "spotify:user:bcpjkynbeutrwmeywd4jzcwjn"
+                    },
+                    "public": true,
+                    "snapshot_id": "AAAAAjFgAwABaZc2/kuJLYqEAlYA+CKy",
+                    "tracks": {"href": "https://api.spotify.com/v1/playlists/7IUUB0E66WPbNGxIarxNzH/tracks", "total": 10},
+                    "type": "playlist",
+                    "uri": "spotify:playlist:7IUUB0E66WPbNGxIarxNzH"
+                }
+                // Weitere Playlists hier
+            ]
+        };
+
+        // Playlist-Daten extrahieren und anzeigen
+        const playlistsContainer = document.getElementById('playlists');
+
+        response.items.forEach(playlist => {
+            const playlistDiv = document.createElement('div');
+            const playlistName = document.createElement('h2');
+            playlistName.textContent = playlist.name;
+
+            const playlistImage = document.createElement('img');
+            playlistImage.src = playlist.images[0].url; // Bild-URL der Playlist
+            playlistImage.alt = playlist.name;
+
+            const playlistLink = document.createElement('a');
+            playlistLink.href = playlist.external_urls.spotify;
+            playlistLink.textContent = 'Zur Playlist auf Spotify';
+
+            // Füge die Elemente in das HTML ein
+            playlistDiv.appendChild(playlistName);
+            playlistDiv.appendChild(playlistImage);
+            playlistDiv.appendChild(playlistLink);
+
+            playlistsContainer.appendChild(playlistDiv);
+        });
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-17" view-index="0" gantt-divider-location="334" resource-divider-location="300" version="3.3.3312" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-24" view-index="0" gantt-divider-location="332" resource-divider-location="300" version="3.3.3312" locale="de_DE">
     <description/>
     <view zooming-state="default:5" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="174" order="0"/>
+        <field id="tpd3" name="Vorgang" width="172" order="0"/>
         <field id="tpd4" name="Anfang" width="71" order="1"/>
         <field id="tpd5" name="Ende" width="72" order="2"/>
         <field id="tpd15" name="Notizen" width="20" order="3"/>
@@ -57,8 +57,8 @@
             </task>
         </task>
         <task id="35" uid="504f4fda0c5b445b9b1849dc195f8c3e" name="API Konzeption" meeting="true" start="2025-03-03" duration="0" complete="80" expand="true"/>
-        <task id="10" uid="24a255a92d594a738854657eb18b4df6" name="Siwpe Mechanismus Design" meeting="false" start="2025-03-04" duration="35" complete="54" expand="true">
-            <task id="11" uid="c9eef223894d4607920ac0348409c37a" name="UX-UI für Swipen entwerfen" meeting="false" start="2025-03-04" duration="21" complete="90" expand="true">
+        <task id="10" uid="24a255a92d594a738854657eb18b4df6" name="Siwpe Mechanismus Design" meeting="false" start="2025-03-04" duration="35" complete="60" expand="true">
+            <task id="11" uid="c9eef223894d4607920ac0348409c37a" name="UX-UI für Swipen entwerfen" meeting="false" start="2025-03-04" duration="21" complete="100" expand="true">
                 <depend id="12" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="12" uid="7a9787d79440442eaeae664fae3bb388" name="vlt. Libary- Auswahl" meeting="false" start="2025-04-02" duration="14" complete="0" expand="true">

@@ -103,7 +103,7 @@ body::-webkit-scrollbar {
     perspective-origin: center 50%;
     transform-style: preserve-3d;
     position: relative;
-    background-image: url(./img/box_background.png);
+    background-image: url(./img/background2.png);
 }
 
 .card {

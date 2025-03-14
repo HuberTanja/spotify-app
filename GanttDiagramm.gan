@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-24" view-index="0" gantt-divider-location="354" resource-divider-location="300" version="3.3.3312" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-17" view-index="0" gantt-divider-location="334" resource-divider-location="300" version="3.3.3312" locale="de_DE">
     <description/>
     <view zooming-state="default:5" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="187" order="0"/>
-        <field id="tpd4" name="Anfang" width="75" order="1"/>
-        <field id="tpd5" name="Ende" width="75" order="2"/>
+        <field id="tpd3" name="Vorgang" width="174" order="0"/>
+        <field id="tpd4" name="Anfang" width="71" order="1"/>
+        <field id="tpd5" name="Ende" width="72" order="2"/>
         <field id="tpd15" name="Notizen" width="20" order="3"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
@@ -75,16 +75,16 @@
             </task>
         </task>
         <task id="37" uid="f8a787913fb54bf8996c78b7644949fd" name="Frontend-Entwicklung" meeting="true" start="2025-06-09" duration="0" complete="0" expand="true"/>
-        <task id="15" uid="8a2ea6963aef434c83512343a17996a4" name="Backend_Integration" meeting="false" start="2024-12-30" duration="42" complete="57" expand="true">
-            <task id="16" uid="6e6ac9ea498842c8a208b9f6f33e9489" name="Sptify-API einbindung" meeting="false" start="2024-12-30" duration="21" complete="85" expand="true">
+        <task id="15" uid="8a2ea6963aef434c83512343a17996a4" name="Backend_Integration" meeting="false" start="2024-12-30" duration="42" complete="100" expand="true">
+            <task id="16" uid="6e6ac9ea498842c8a208b9f6f33e9489" name="Sptify-API einbindung" meeting="false" start="2024-12-30" duration="21" complete="100" expand="true">
                 <depend id="17" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="17" uid="b495d4bb89134808920482a5deb2b0ac" name="Playlistzugriff und Songdaten integrieren" meeting="false" start="2025-01-28" duration="21" complete="30" expand="true">
+            <task id="17" uid="b495d4bb89134808920482a5deb2b0ac" name="Playlistzugriff und Songdaten integrieren" meeting="false" start="2025-01-28" duration="21" complete="100" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
         <task id="38" uid="47b384203e6a4a80970a93cb8ea624c3" name="Backend-Integration" meeting="true" start="2025-02-25" duration="0" complete="0" expand="true"/>
-        <task id="18" uid="87a6a597c361472581d784f7ea9558ff" name="Swipe-Mechanismus" meeting="false" start="2025-02-26" duration="20" complete="4" expand="false">
+        <task id="18" uid="87a6a597c361472581d784f7ea9558ff" name="Swipe-Mechanismus" meeting="false" start="2025-02-26" duration="20" complete="4" expand="true">
             <task id="19" uid="307f9c1fad49454a8d4785c0028c34c5" name="Click-Event integrieren" meeting="false" start="2025-02-26" duration="10" complete="0" thirdDate="2025-02-25" thirdDate-constraint="1" expand="true">
                 <depend id="20" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -94,7 +94,7 @@
             </task>
         </task>
         <task id="39" uid="82596f723aa247de90a88201a9335707" name="Swipe Mechanismus" meeting="true" start="2025-03-25" duration="0" complete="0" expand="true"/>
-        <task id="21" uid="2c05144603c642369b8adf76bc25ff59" name="Designfinalisierung" meeting="false" start="2025-03-14" duration="28" complete="0" expand="false">
+        <task id="21" uid="2c05144603c642369b8adf76bc25ff59" name="Designfinalisierung" meeting="false" start="2025-03-14" duration="28" complete="0" expand="true">
             <task id="22" uid="4918745846ac4ba6b2899b4b2692bf49" name="Visuelle Elemente anpassen" meeting="false" start="2025-03-14" duration="14" complete="0" thirdDate="2025-03-14" thirdDate-constraint="1" expand="true">
                 <depend id="24" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -103,7 +103,7 @@
             </task>
         </task>
         <task id="40" uid="cf9dd820d7844f1e96ada68e76de4d01" name="Desingfinalisierung" meeting="true" start="2025-04-22" duration="0" complete="0" expand="true"/>
-        <task id="25" uid="6778f6fdfb384635bf5564961b99cb32" name="Testphase" meeting="false" start="2025-04-23" duration="24" complete="0" expand="false">
+        <task id="25" uid="6778f6fdfb384635bf5564961b99cb32" name="Testphase" meeting="false" start="2025-04-23" duration="24" complete="0" expand="true">
             <task id="26" uid="e3a410d6e6ec446593b6cb6e62c23996" name="Feedback für Testprogramm analysieren" meeting="false" start="2025-04-23" duration="12" complete="0" thirdDate="2025-04-21" thirdDate-constraint="1" expand="true">
                 <depend id="27" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -112,7 +112,7 @@
             </task>
         </task>
         <task id="41" uid="9ba09c9904c7426eb18fd6a124ff842a" name="Testphase" meeting="true" start="2025-05-26" duration="0" complete="0" expand="true"/>
-        <task id="28" uid="fd8412ab977e45a5a1ad3b5d062b372d" name="Adgabe" meeting="false" start="2025-06-10" duration="9" complete="0" expand="true">
+        <task id="28" uid="fd8412ab977e45a5a1ad3b5d062b372d" name="Adgabe" meeting="false" start="2025-06-10" duration="9" complete="0" expand="false">
             <task id="29" uid="70f7f3a52f9548258a885e35d4c5116d" name="Projektdokumentattion erstellen" meeting="false" start="2025-06-10" duration="5" complete="0" expand="true">
                 <depend id="30" type="2" difference="0" hardness="Strong"/>
             </task>

@@ -127,5 +127,10 @@ a:hover {
 
 /*** Album Cover ***/
 #albumCoverIMG {
-    border-radius: 20px;
+    border-radius: 25px;
+    transition: all .3s;
+}
+
+#albumCoverIMG:hover {
+    transform: scale(1.1);
 }

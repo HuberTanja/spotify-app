@@ -1,7 +1,16 @@
+/*** Globale Variablen ***/
+:root {
+    --black-color: #191414;  
+    --green-color: #1db954;
+    --pink-color: #ef4a75;
+    --white-color: #fffbf7;
+}
+
+/*** ALLGEMEIN ***/
 body {
     font-family: Arial, sans-serif;
-    background-color: #1e1e2f;
-    color: #fff;
+    background-color: var(--white-color);
+    color: var(--black-color);
     text-align: center;
     padding: 40px;
     margin: 0;

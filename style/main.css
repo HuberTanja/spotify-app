@@ -88,6 +88,11 @@ a:hover {
 }
 
 /*** LOGO STYLING ***/
-#logoTop image {
-    scale: .5;
+#logoTop {
+    scale: 0.1;
+}
+
+#logoAll{
+    display: grid;
+    grid-template-columns: auto auto auto;
 }

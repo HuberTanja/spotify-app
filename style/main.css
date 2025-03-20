@@ -31,15 +31,14 @@ body {
 }
 
 h1 {
-    color: var(--green-color);
+    color: var(--black-color);
     font-size: 28px;
     margin-bottom: 15px;
 }
 
 p, a {
     font-size: 18px;
-    color: var(--white-color);
-    background: var(--pink-color);
+    color: var(--black-color);
     padding: 12px;
     border-radius: 6px;
     display: inline-block;

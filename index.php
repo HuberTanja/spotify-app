@@ -26,7 +26,11 @@ if (sizeof($_GET) == 0) {
         <title>Spotify App</title>
     </head>
     <body>
-        <h1>Willkommen bei der Spotify App</h1>
+        <h1 id="logoAll">
+            <div class="headlineTop">Beat</div>
+            <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
+            <div class="headlineTop">Buddy</div>
+        </h1>
         <p><a href="?action=login">Login mit Spotify</a></p>
     </body>
     </html>

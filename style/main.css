@@ -161,6 +161,5 @@ a:hover {
 .controls {
     display: flex;
     align-items: center; /* Optional: Aligns images vertically */
-    gap: 10px; /* Optional: Adds space between the images */
 }
 

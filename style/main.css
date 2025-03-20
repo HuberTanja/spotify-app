@@ -35,6 +35,11 @@ body {
     margin: 0;
 }
 
+/*** Headline TOP ***/
+#headlineTop image {
+    scale: .5;
+}
+
 .container {
     max-width: 800px;
     background: var(--black-color);

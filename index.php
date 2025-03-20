@@ -160,6 +160,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Atma:wght@300;400;500;600;700&family=Ephesis&family=Funnel+Display:wght@300..800&family=Jua&family=Modak&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
     <body>
+        <img class="backimg" id="backimg1" src="./Design/bgIMG/back1.png" alt="" srcset="">
+        <img class="backimg" id="backimg2" src="./Design/bgIMG/back2.png" alt="" srcset="">
+        <img class="backimg" id="backimg3" src="./Design/bgIMG/back3.png" alt="" srcset="">
+        <img class="backimg" id="backimg4" src="./Design/bgIMG/back4.png" alt="" srcset="">
+        <img class="backimg" id="backimg5" src="./Design/bgIMG/back5.png" alt="" srcset="">
+
         <h1 id="logoAll">
             <div class="headlineTop">Beat</div>
             <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">

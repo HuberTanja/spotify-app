@@ -40,6 +40,16 @@ body {
     scale: .5;
 }
 
+/*** LOGO STYLING ***/
+#logoTop {
+    scale: 0.1;
+}
+
+#logoAll{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
 .container {
     max-width: 800px;
     background: var(--black-color);

@@ -169,7 +169,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
                  alt="<?= htmlspecialchars($current_track['name']) ?>" 
                  width="200">
+            <br>
             <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
+            <br>
             <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
         </div>
 

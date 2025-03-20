@@ -60,7 +60,6 @@ body {
     align-items: center; /* Vertikale Zentrierung */
     justify-content: center; /* Zentriert die Inhalte horizontal */
     gap: 10px; /* Abstand zwischen den Elementen */
-    scale: 1.5;
 }
 
 .container {

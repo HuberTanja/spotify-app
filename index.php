@@ -166,7 +166,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <div class="headlineTop">Buddy</div>
         </h1>
         <div class="track-container">
-            <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
+            <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
                  alt="<?= htmlspecialchars($current_track['name']) ?>" 
                  width="200">
             <br>

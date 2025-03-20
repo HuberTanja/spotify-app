@@ -176,7 +176,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         </div>
 
         <div class="controls">
-            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev">⬅️ Zurück</a>
+            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
         </div>
 

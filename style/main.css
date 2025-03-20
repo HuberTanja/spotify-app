@@ -156,3 +156,11 @@ a:hover {
 #redHeart {
     scale: .2;
 }
+
+/*** Controls container ***/
+.controls {
+    display: flex;
+    align-items: center; /* Optional: Aligns images vertically */
+    gap: 10px; /* Optional: Adds space between the images */
+}
+

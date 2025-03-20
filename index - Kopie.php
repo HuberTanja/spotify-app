@@ -147,43 +147,130 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     $current_track = $tracks[$_SESSION['track_index']]['track'];
     ?>
 
-    <!DOCTYPE html>
-    <html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/main.css">
-        <title><?= htmlspecialchars($playlist['name']) ?></title>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/main.css">
+    <title><?= htmlspecialchars($playlist['name']) ?></title>
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Atma:wght@300;400;500;600;700&family=Ephesis&family=Funnel+Display:wght@300..800&family=Jua&family=Modak&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <h1 id="logoAll">
-            <div class="headlineTop">Beat</div>
-            <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
-            <div class="headlineTop">Buddy</div>
-        </h1>
-        <div class="track-container">
-            <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
-                 alt="<?= htmlspecialchars($current_track['name']) ?>" 
-                 width="200">
-            <br>
-            <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
-            <br>
-            <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
-        </div>
+    <script src="./test/card.js"></script>
+    <script src="./test/script.js"></script>
 
-        <div class="controls">
-            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
-            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
-        </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Atma:wght@300;400;500;600;700&family=Ephesis&family=Funnel+Display:wght@300..800&family=Jua&family=Modak&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 id="logoAll">
+        <div class="headlineTop">Beat</div>
+        <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
+        <div class="headlineTop">Buddy</div>
+    </h1>
 
+    <!-- Track Container -->
+    <div class="track-container">
+        <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
+             alt="<?= htmlspecialchars($current_track['name']) ?>" 
+             width="200">
+        <br>
+        <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
+        <br>
+        <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+    </div>
 
-        <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
-    </body>
-    </html>
+    <!-- Controls -->
+    <div class="controls">
+        <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart" onclick="swipeRight()"></a>
+        <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart" onclick="swipeLeft()"></a>
+    </div>
+
+    <!-- Navigation Link -->
+    <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
+
+    <!-- Swiper Container -->
+    <div id="swiper"></div>
+
+    <!-- JavaScript Integration -->
+    <script>
+        const swiper = document.querySelector('#swiper');
+        const like = document.querySelector('#like');
+        const dislike = document.querySelector('#dislike');
+
+        let currentIndex = 0;
+        let isSongPlaying = false;
+
+        const albumData = [
+            // Beispiel-Daten
+            { artist: "Künstler 1", song: "Song 1", coverUrl: "./Design/Icons/cover1.jpg" },
+            { artist: "Künstler 2", song: "Song 2", coverUrl: "./Design/Icons/cover2.jpg" },
+            { artist: "Künstler 3", song: "Song 3", coverUrl: "./Design/Icons/cover3.jpg" }
+        ];
+
+        function appendNewCard() {
+            if (currentIndex >= albumData.length) {
+                currentIndex = 0;
+            }
+
+            const currentAlbum = albumData[currentIndex];
+            const card = new Card({
+                artist: currentAlbum.artist,
+                song: currentAlbum.song,
+                imageUrl: currentAlbum.coverUrl,
+                onDismiss: () => {
+                    if (!isSongPlaying) {
+                        isSongPlaying = true;
+                        loadNextCard();
+                        setTimeout(() => { isSongPlaying = false; }, 500);
+                    }
+                },
+                onLike: () => {
+                    like.style.animationPlayState = 'running';
+                    like.classList.toggle('trigger');
+                },
+                onDislike: () => {
+                    dislike.style.animationPlayState = 'running';
+                    dislike.classList.toggle('trigger');
+                }
+            });
+
+            card.element.style.zIndex = albumData.length - currentIndex;
+            card.element.cardInstance = card;
+            swiper.append(card.element);
+            currentIndex++;
+        }
+
+        function loadNextCard() {
+            appendNewCard();
+        }
+
+        function swipeRight() {
+            const card = swiper.querySelector('.card:last-child');
+            if (card) {
+                const cardInstance = card.cardInstance;
+                if (cardInstance) {
+                    cardInstance.swipe(1);
+                }
+            }
+        }
+
+        function swipeLeft() {
+            const card = swiper.querySelector('.card:last-child');
+            if (card) {
+                const cardInstance = card.cardInstance;
+                if (cardInstance) {
+                    cardInstance.swipe(-1);
+                }
+            }
+        }
+
+        // Lade nur die erste Karte beim Start
+        appendNewCard();
+    </script>
+
+</body>
+</html>
     <?php
     exit;
 }

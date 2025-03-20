@@ -93,7 +93,6 @@ p, a {
 }
 
 a:hover {
-    background: var(--green-color);
     color: var(--black-color);
 }
 

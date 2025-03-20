@@ -108,16 +108,37 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         header("Location: ?action=refresh-token");
         exit;
     }
-    
+
     if (!isset($_GET['id'])) {
         echo json_encode(["error" => "No playlist ID provided"]);
         exit;
     }
-    
+
     $playlist_id = $_GET['id'];
     $playlist = apiRequest('playlists/' . $playlist_id);
+    $tracks = $playlist['tracks']['items'] ?? [];
 
+    if (empty($tracks)) {
+        echo "<p>Diese Playlist enthält keine Songs.</p>";
+        echo '<p><a href="?action=playlists">Zurück zu den Playlists</a></p>';
+        exit;
+    }
+
+    // Initialisiere oder aktualisiere den Song-Index
+    if (!isset($_SESSION['track_index']) || $_GET['id'] !== ($_SESSION['playlist_id'] ?? '')) {
+        $_SESSION['track_index'] = 0;
+        $_SESSION['playlist_id'] = $_GET['id'];
+    }
+
+    if (isset($_GET['nav']) && $_GET['nav'] == 'next') {
+        $_SESSION['track_index'] = ($_SESSION['track_index'] + 1) % count($tracks);
+    } elseif (isset($_GET['nav']) && $_GET['nav'] == 'prev') {
+        $_SESSION['track_index'] = ($_SESSION['track_index'] - 1 + count($tracks)) % count($tracks);
+    }
+
+    $current_track = $tracks[$_SESSION['track_index']]['track'];
     ?>
+
     <!DOCTYPE html>
     <html lang="de">
     <head>
@@ -128,17 +149,27 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     </head>
     <body>
         <h1><?= htmlspecialchars($playlist['name']) ?></h1>
-            <?php foreach ($playlist['tracks']['items'] as $track): ?>
-                    <img src="<?= $track['track']['album']['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($track['track']['name']) ?>" width="100">
-                    <?= htmlspecialchars($track['track']['name']) ?> – 
-                    <?= htmlspecialchars($track['track']['artists'][0]['name']) ?>
-            <?php endforeach; ?>
+
+        <div class="track-container">
+            <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
+                 alt="<?= htmlspecialchars($current_track['name']) ?>" 
+                 width="200">
+            <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
+            <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+        </div>
+
+        <div class="controls">
+            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev">⬅️ Zurück</a>
+            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next">Weiter ➡️</a>
+        </div>
+
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
     </body>
     </html>
     <?php
     exit;
 }
+
 
 // Token erneuern
 if (isset($_GET['action']) && $_GET['action'] == 'refresh-token') {

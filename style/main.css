@@ -106,12 +106,3 @@ a:hover {
     border-radius: 6px;
 }
 
-/*** LOGO STYLING ***/
-#logoTop {
-    scale: 0.1;
-}
-
-#logoAll{
-    display: grid;
-    grid-template-columns: auto auto auto;
-}

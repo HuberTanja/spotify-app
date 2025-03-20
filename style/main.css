@@ -86,3 +86,8 @@ a:hover {
     padding: 10px;
     border-radius: 6px;
 }
+
+/*** LOGO STYLING ***/
+#logoTop image {
+    scale: .5;
+}

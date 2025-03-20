@@ -18,7 +18,6 @@ if (sizeof($_GET) == 0) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style/main.css">
-
         <title>Spotify App</title>
     </head>
     <body>
@@ -75,9 +74,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
         header("Location: ?action=refresh-token");
         exit;
     }
-
+    
     $playlists = apiRequest('me/playlists');
-
     ?>
     <!DOCTYPE html>
     <html lang="de">
@@ -85,7 +83,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style/main.css">
-
         <title>Deine Spotify Playlists</title>
     </head>
     <body>
@@ -94,6 +91,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
             <?php foreach ($playlists['items'] as $playlist): ?>
                 <li>
                     <a href="?action=playlist&id=<?= $playlist['id'] ?>">
+                        <img src="<?= $playlist['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($playlist['name']) ?>" width="100">
                         <?= htmlspecialchars($playlist['name']) ?>
                     </a>
                 </li>
@@ -119,7 +117,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     
     $playlist_id = $_GET['id'];
     $playlist = apiRequest('playlists/' . $playlist_id);
-
     ?>
     <!DOCTYPE html>
     <html lang="de">
@@ -134,6 +131,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <ul>
             <?php foreach ($playlist['tracks']['items'] as $track): ?>
                 <li>
+                    <img src="<?= $track['track']['album']['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($track['track']['name']) ?>" width="100">
                     <?= htmlspecialchars($track['track']['name']) ?> – 
                     <?= htmlspecialchars($track['track']['artists'][0]['name']) ?>
                 </li>
@@ -143,26 +141,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     </body>
     </html>
     <?php
-    exit;
-}
-
-// Token erneuern
-if (isset($_GET['action']) && $_GET['action'] == 'refresh-token') {
-    if (!isset($_SESSION['refresh_token'])) {
-        header("Location: ?action=login");
-        exit;
-    }
-    
-    $response = requestToken('refresh_token', $_SESSION['refresh_token']);
-    if (!isset($response['access_token'])) {
-        echo json_encode(["error" => "Failed to refresh token", "details" => $response]);
-        exit;
-    }
-    
-    $_SESSION['access_token'] = $response['access_token'];
-    $_SESSION['expires_at'] = time() + ($response['expires_in'] ?? 3600);
-    
-    header("Location: ?action=playlists");
     exit;
 }
 

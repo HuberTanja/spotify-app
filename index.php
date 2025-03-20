@@ -148,8 +148,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <title><?= htmlspecialchars($playlist['name']) ?></title>
     </head>
     <body>
-        <h1><?= htmlspecialchars($playlist['name']) ?></h1>
-
+        <h1>Beat
+            <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
+            Buddy
+        </h1>
         <div class="track-container">
             <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
                  alt="<?= htmlspecialchars($current_track['name']) ?>" 

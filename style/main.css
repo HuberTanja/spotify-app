@@ -47,6 +47,7 @@ body {
 }
 
 #logoAll{
+    color: Anton;
     display: flex;
     align-items: center; /* Vertikale Zentrierung */
     justify-content: center; /* Zentriert die Inhalte horizontal */

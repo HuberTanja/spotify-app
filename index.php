@@ -10,7 +10,7 @@ define('TOKEN_URL', 'https://accounts.spotify.com/api/token');
 define('API_BASE_URL', 'https://api.spotify.com/v1/');
 
 // Startseite mit Login-Link
-if (sizeof($_GET) == 0) {
+if (empty($_GET)) {
     ?>
     <!DOCTYPE html>
     <html lang="de">
@@ -18,7 +18,6 @@ if (sizeof($_GET) == 0) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style/main.css">
-
         <title>Spotify App</title>
     </head>
     <body>
@@ -31,9 +30,9 @@ if (sizeof($_GET) == 0) {
 }
 
 // Login: Weiterleitung zur Spotify-Authentifizierung
-if (isset($_GET['action']) && $_GET['action'] == 'login') {
+if ($_GET['action'] === 'login') {
     $scope = 'user-read-private user-read-email playlist-read-private';
-    $auth_url = AUTH_URL . "?" . http_build_query([
+    $auth_url = AUTH_URL . '?' . http_build_query([
         'client_id' => CLIENT_ID,
         'response_type' => 'code',
         'scope' => $scope,
@@ -44,40 +43,44 @@ if (isset($_GET['action']) && $_GET['action'] == 'login') {
     exit;
 }
 
+// Logout: Sitzung beenden
+if ($_GET['action'] === 'logout') {
+    session_destroy();
+    header("Location: index.php");
+    exit;
+}
+
 // Callback: Verarbeitet die Rückmeldung von Spotify
-if (isset($_GET['action']) && $_GET['action'] == 'callback') {
+if ($_GET['action'] === 'callback') {
     if (isset($_GET['error'])) {
-        echo json_encode(["error" => $_GET['error']]);
-        exit;
+        die(json_encode(["error" => $_GET['error']]));
     }
     
-    if (isset($_GET['code'])) {
-        $response = requestToken('authorization_code', $_GET['code']);
-        if (!isset($response['access_token'])) {
-            echo json_encode(["error" => "Failed to get token", "details" => $response]);
-            exit;
-        }
-
-        $_SESSION['access_token'] = $response['access_token'];
-        $_SESSION['refresh_token'] = $response['refresh_token'] ?? null;
-        $_SESSION['expires_at'] = time() + $response['expires_in'];
-        
-        header("Location: ?action=playlists");
-        exit;
+    if (!isset($_GET['code'])) {
+        die(json_encode(["error" => "No authorization code provided"]));
     }
-    echo json_encode(["error" => "No authorization code provided"]);
+
+    $response = requestToken('authorization_code', $_GET['code']);
+    if (!isset($response['access_token'])) {
+        die(json_encode(["error" => "Failed to get token", "details" => $response]));
+    }
+
+    $_SESSION['access_token'] = $response['access_token'];
+    $_SESSION['refresh_token'] = $response['refresh_token'] ?? null;
+    $_SESSION['expires_at'] = time() + $response['expires_in'];
+
+    header("Location: ?action=playlists");
     exit;
 }
 
 // Playlists abrufen
-if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
-    if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
+if ($_GET['action'] === 'playlists') {
+    if (!isAuthenticated()) {
         header("Location: ?action=refresh-token");
         exit;
     }
 
     $playlists = apiRequest('me/playlists');
-
     ?>
     <!DOCTYPE html>
     <html lang="de">
@@ -85,7 +88,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./style/main.css">
-
         <title>Deine Spotify Playlists</title>
     </head>
     <body>
@@ -93,12 +95,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
         <ul>
             <?php foreach ($playlists['items'] as $playlist): ?>
                 <li>
-                    <a href="?action=playlist&id=<?= $playlist['id'] ?>">
+                    <a href="?action=playlist&id=<?= htmlspecialchars($playlist['id']) ?>">
+                        <img src="<?= htmlspecialchars($playlist['images'][0]['url'] ?? 'default.jpg') ?>" alt="Cover" width="100">
                         <?= htmlspecialchars($playlist['name']) ?>
                     </a>
                 </li>
             <?php endforeach; ?>
         </ul>
+        <p><a href="?action=logout">Logout</a></p>
     </body>
     </html>
     <?php
@@ -106,20 +110,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
 }
 
 // Einzelne Playlist abrufen
-if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
-    if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
+if ($_GET['action'] === 'playlist') {
+    if (!isAuthenticated()) {
         header("Location: ?action=refresh-token");
         exit;
     }
     
     if (!isset($_GET['id'])) {
-        echo json_encode(["error" => "No playlist ID provided"]);
-        exit;
+        die(json_encode(["error" => "No playlist ID provided"]));
     }
     
-    $playlist_id = $_GET['id'];
-    $playlist = apiRequest('playlists/' . $playlist_id);
-
+    $playlist = apiRequest('playlists/' . $_GET['id']);
     ?>
     <!DOCTYPE html>
     <html lang="de">
@@ -131,11 +132,19 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     </head>
     <body>
         <h1><?= htmlspecialchars($playlist['name']) ?></h1>
+        <img src="<?= htmlspecialchars($playlist['images'][0]['url'] ?? 'default.jpg') ?>" alt="Cover" width="200">
         <ul>
             <?php foreach ($playlist['tracks']['items'] as $track): ?>
                 <li>
                     <?= htmlspecialchars($track['track']['name']) ?> – 
                     <?= htmlspecialchars($track['track']['artists'][0]['name']) ?>
+                    <?php if (!empty($track['track']['preview_url'])): ?>
+                        <br>
+                        <audio controls>
+                            <source src="<?= htmlspecialchars($track['track']['preview_url']) ?>" type="audio/mpeg">
+                            Dein Browser unterstützt kein Audio-Tag.
+                        </audio>
+                    <?php endif; ?>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -147,7 +156,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
 }
 
 // Token erneuern
-if (isset($_GET['action']) && $_GET['action'] == 'refresh-token') {
+if ($_GET['action'] === 'refresh-token') {
     if (!isset($_SESSION['refresh_token'])) {
         header("Location: ?action=login");
         exit;
@@ -155,8 +164,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'refresh-token') {
     
     $response = requestToken('refresh_token', $_SESSION['refresh_token']);
     if (!isset($response['access_token'])) {
-        echo json_encode(["error" => "Failed to refresh token", "details" => $response]);
-        exit;
+        die(json_encode(["error" => "Failed to refresh token", "details" => $response]));
     }
     
     $_SESSION['access_token'] = $response['access_token'];
@@ -184,7 +192,7 @@ function requestToken($grantType, $codeOrToken) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postFields));
-    
+
     $response = curl_exec($ch);
     curl_close($ch);
     return json_decode($response, true);
@@ -197,8 +205,13 @@ function apiRequest($endpoint) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Authorization: Bearer ' . $_SESSION['access_token']
     ]);
-    
+
     $response = curl_exec($ch);
     curl_close($ch);
     return json_decode($response, true);
+}
+
+// Prüfen, ob der Nutzer authentifiziert ist
+function isAuthenticated() {
+    return isset($_SESSION['access_token']) && time() < $_SESSION['expires_at'];
 }

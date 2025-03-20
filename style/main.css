@@ -174,8 +174,8 @@ a:hover {
 }
 
 /* Zufällige Positionierung am Rand */
-#backimg1 { top: 3%; left: 8%; }
-#backimg2 { top: 6%; right: 10%; }
-#backimg3 { bottom: -2%; left: 7%; }
-#backimg4 { bottom: 50%; right: 3%; }
-#backimg5 { top: 90%; left: 90%; transform: translate(-50%, -50%); }
+#backimg1 { top: 90%; left: 90%; transform: translate(-50%, -50%); }
+#backimg2 { top: 6%; right: -10%; }
+#backimg3 { bottom: -5%; left: 97%; }
+#backimg4 { bottom: 0%; right: 80%; transform: translate(-20%, -20%);}
+#backimg5 { top: 0%; left: 8%; }

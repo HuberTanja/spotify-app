@@ -4,9 +4,6 @@
     --green-color: #1db954;
     --pink-color: #ef4a75;
     --white-color: #fffbf7;
-    --yellow-color: #ffcc00;
-    --dark-gray: #2a2a3a;
-    --light-gray: #3a3a4a;
 }
 
 /*** ALLGEMEIN ***/
@@ -21,7 +18,7 @@ body {
 
 .container {
     max-width: 800px;
-    background: var(--dark-gray);
+    background: var(--black-color);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -34,15 +31,15 @@ body {
 }
 
 h1 {
-    color: var(--yellow-color);
+    color: var(--green-color);
     font-size: 28px;
     margin-bottom: 15px;
 }
 
 p, a {
     font-size: 18px;
-    color: #ddd;
-    background: var(--light-gray);
+    color: var(--white-color);
+    background: var(--pink-color);
     padding: 12px;
     border-radius: 6px;
     display: inline-block;
@@ -50,7 +47,7 @@ p, a {
 }
 
 a:hover {
-    background: var(--yellow-color);
+    background: var(--green-color);
     color: var(--black-color);
 }
 
@@ -65,7 +62,7 @@ a:hover {
 
 .playlist {
     background: linear-gradient(135deg, var(--pink-color), var(--green-color));
-    color: white;
+    color: var(--white-color);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);

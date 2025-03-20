@@ -90,7 +90,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
     </head>
     <body>
         <h1>Deine Playlists</h1>
-        <ul>
             <?php foreach ($playlists['items'] as $playlist): ?>
                 <li>
                     <a href="?action=playlist&id=<?= $playlist['id'] ?>">
@@ -99,7 +98,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
                     </a>
                 </li>
             <?php endforeach; ?>
-        </ul>
     </body>
     </html>
     <?php
@@ -132,7 +130,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     </head>
     <body>
         <h1><?= htmlspecialchars($playlist['name']) ?></h1>
-        <ul>
             <?php foreach ($playlist['tracks']['items'] as $track): ?>
                 <li>
                     <img src="<?= $track['track']['album']['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($track['track']['name']) ?>" width="100">
@@ -140,7 +137,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
                     <?= htmlspecialchars($track['track']['artists'][0]['name']) ?>
                 </li>
             <?php endforeach; ?>
-        </ul>
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
     </body>
     </html>

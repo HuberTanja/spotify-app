@@ -6,6 +6,25 @@
     --white-color: #fffbf7;
 }
 
+/*** FONTS ***/
+.anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.ephesis-regular {
+font-family: "Ephesis", cursive;
+font-weight: 400;
+font-style: normal;
+}
+
+.jua-regular {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }  
+  
 /*** ALLGEMEIN ***/
 body {
     font-family: Arial, sans-serif;

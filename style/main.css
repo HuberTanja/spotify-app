@@ -37,17 +37,20 @@ body {
 
 /*** Headline TOP ***/
 #headlineTop image {
-    scale: .5;
+    font-size: 2rem; /* Falls nötig anpassen */
 }
 
 /*** LOGO STYLING ***/
 #logoTop {
-    scale: 0.1;
+    height: 50px; /* Größe des Logos anpassen */
+    width: auto;
 }
 
 #logoAll{
-    display: grid;
-    grid-template-rows: auto auto auto;
+    display: flex;
+    align-items: center; /* Vertikale Zentrierung */
+    justify-content: center; /* Zentriert die Inhalte horizontal */
+    gap: 10px; /* Abstand zwischen den Elementen */
 }
 
 .container {

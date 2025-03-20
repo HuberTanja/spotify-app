@@ -161,9 +161,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     </head>
     <body>
         <h1 id="logoAll">
-            <h1 class="headlineTop">Beat</h1>
+            <div class="headlineTop">Beat</div>
             <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
-            <h1 class="headlineTop">Buddy</h1>
+            <div class="headlineTop">Buddy</div>
         </h1>
         <div class="track-container">
             <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 

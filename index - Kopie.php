@@ -161,6 +161,24 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Atma:wght@300;400;500;600;700&family=Ephesis&family=Funnel+Display:wght@300..800&family=Jua&family=Modak&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        .swiper-container {
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            display: flex;
+            -webkit-overflow-scrolling: touch;
+        }
+        .track-item {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            padding: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <h1 id="logoAll">
@@ -169,16 +187,84 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <div class="headlineTop">Buddy</div>
     </h1>
 
+    <?php
+        // Annahme: $current_track ist bereits definiert
+        function e($string) {
+            return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+        }
+    ?>
+
+    <?php 
+    function e($string) {
+        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+    }
+    ?>
+    
+    ?>
+
     <!-- Track Container -->
-    <div class="track-container">
-        <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
-             alt="<?= htmlspecialchars($current_track['name']) ?>" 
-             width="200">
-        <br>
-        <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
-        <br>
-        <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+    <div class="swiper-container">
+        <div class="track-item">
+            <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
+                 alt="<?= e($current_track['name']) ?>">
+            <h2><?= e($current_track['name']) ?></h2>
+            <p><?= e($current_track['artists'][0]['name']) ?></p>
+        </div>
+        <!-- Fügen Sie hier weitere track-items hinzu -->
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('.swiper-container');
+        const items = document.querySelectorAll('.track-item');
+        
+        let options = {
+            root: container,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        let observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    console.log('Sichtbarer Track:', entry.target.querySelector('h2').textContent);
+                    // Hier können Sie Aktionen für den sichtbaren Track ausführen
+                }
+            });
+        }, options);
+
+        items.forEach(item => {
+            observer.observe(item);
+        });
+
+        // Optional: Smooth scroll für Desktop
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        container.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 2;
+            container.scrollLeft = scrollLeft - walk;
+        });
+    });
+    </script>
 
     <!-- Controls -->
     <div class="controls">

@@ -194,7 +194,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
         </div>
 
-
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
     </body>
     </html>

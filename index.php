@@ -177,13 +177,18 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         </h1>
         <div class="track-container">
             <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
-                 alt="<?= htmlspecialchars($current_track['name']) ?>" 
-                 width="200">
+                alt="<?= htmlspecialchars($current_track['name']) ?>" 
+                width="200">
             <br>
             <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
             <br>
             <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+            
+            <!-- Spotify Embedded Player -->
+            <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>"
+                    width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
+
 
         <div class="controls">
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>

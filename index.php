@@ -184,11 +184,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <br>
             <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
             
-            <!-- Spotify Embedded Player -->
-            <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>"
+            <!-- Spotify Embedded Player with Autoplay -->
+            <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>?autoplay=1"
                     width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
-
 
         <div class="controls">
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>

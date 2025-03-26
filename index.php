@@ -108,6 +108,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
                         <?= htmlspecialchars($playlist['name']) ?>
                     </a>
             <?php endforeach; ?>
+            
+            <!-- Button zum logout -->
+            <button onclick="window.location.href='logout.php'">Logout</button>
     </body>
     </html>
     <?php

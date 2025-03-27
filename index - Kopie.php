@@ -155,18 +155,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     <link rel="stylesheet" href="./style/main.css">
     <title><?= htmlspecialchars($playlist['name']) ?></title>
 
-    <script src="./test/card.js"></script>
-    <script src="./test/script.js"></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Atma:wght@300;400;500;600;700&family=Ephesis&family=Funnel+Display:wght@300..800&family=Jua&family=Modak&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         .swiper-container {
-            overflow-x: scroll;
+            overflow-x: hidden;
             scroll-snap-type: x mandatory;
             display: flex;
             -webkit-overflow-scrolling: touch;
+            position: relative;
         }
         .track-item {
             flex: 0 0 100%;
@@ -187,28 +185,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <div class="headlineTop">Buddy</div>
     </h1>
 
-    <?php
-        // Annahme: $current_track ist bereits definiert
-        function e($string) {
-            return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-        }
-    ?>
-
-    <?php 
-    function e($string) {
-        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-    }
-    ?>
-    
-    ?>
-
     <!-- Track Container -->
     <div class="swiper-container">
         <div class="track-item">
             <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
-                 alt="<?= e($current_track['name']) ?>">
-            <h2><?= e($current_track['name']) ?></h2>
-            <p><?= e($current_track['artists'][0]['name']) ?></p>
+                 alt="<?= htmlspecialchars($current_track['name']) ?>">
+            <h2><?= htmlspecialchars($current_track['name']) ?></h2>
+            <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
         </div>
         <!-- Fügen Sie hier weitere track-items hinzu -->
     </div>
@@ -216,70 +199,44 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const container = document.querySelector('.swiper-container');
-        const items = document.querySelectorAll('.track-item');
-        
-        let options = {
-            root: container,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
-
-        let observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    console.log('Sichtbarer Track:', entry.target.querySelector('h2').textContent);
-                    // Hier können Sie Aktionen für den sichtbaren Track ausführen
-                }
-            });
-        }, options);
-
-        items.forEach(item => {
-            observer.observe(item);
-        });
-
-        // Optional: Smooth scroll für Desktop
+        let startX, moveX, lastX;
         let isDown = false;
-        let startX;
-        let scrollLeft;
 
-        container.addEventListener('mousedown', (e) => {
+        function handleStart(e) {
             isDown = true;
-            startX = e.pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-        });
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+            lastX = container.scrollLeft;
+        }
 
-        container.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        container.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        container.addEventListener('mousemove', (e) => {
+        function handleMove(e) {
             if (!isDown) return;
             e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 2;
-            container.scrollLeft = scrollLeft - walk;
-        });
+            moveX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+            const x = moveX - startX;
+            container.scrollLeft = lastX - x;
+        }
+
+        function handleEnd() {
+            isDown = false;
+            const currentItem = Math.round(container.scrollLeft / container.offsetWidth);
+            container.scrollTo({
+                left: currentItem * container.offsetWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        // Maus-Events
+        container.addEventListener('mousedown', handleStart);
+        container.addEventListener('mousemove', handleMove);
+        container.addEventListener('mouseup', handleEnd);
+        container.addEventListener('mouseleave', handleEnd);
+
+        // Touch-Events
+        container.addEventListener('touchstart', handleStart);
+        container.addEventListener('touchmove', handleMove);
+        container.addEventListener('touchend', handleEnd);
     });
     </script>
-
-    <!-- Controls -->
-    <div class="controls">
-        <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart" onclick="swipeRight()"></a>
-        <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart" onclick="swipeLeft()"></a>
-    </div>
-
-    <!-- Navigation Link -->
-    <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
-
-    <!-- Swiper Container -->
-    <div id="swiper"></div>
-
-    <!-- JavaScript Integration -->
-
 </body>
 </html>
     <?php

@@ -108,6 +108,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
                         <?= htmlspecialchars($playlist['name']) ?>
                     </a>
             <?php endforeach; ?>
+            
+            <!-- Button zum logout -->
+            <button onclick="window.location.href='logout.php'">Logout</button>
     </body>
     </html>
     <?php
@@ -177,19 +180,22 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         </h1>
         <div class="track-container">
             <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
-                 alt="<?= htmlspecialchars($current_track['name']) ?>" 
-                 width="200">
+                alt="<?= htmlspecialchars($current_track['name']) ?>" 
+                width="200">
             <br>
             <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
             <br>
             <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+            
+            <!-- Spotify Embedded Player with Autoplay -->
+            <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>?autoplay=1"
+                    width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
 
         <div class="controls">
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
         </div>
-
 
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
     </body>

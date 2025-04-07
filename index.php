@@ -107,8 +107,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
                         <img src="<?= $playlist['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($playlist['name']) ?>" width="100">
                         <?= htmlspecialchars($playlist['name']) ?>
                     </a>
+                
             <?php endforeach; ?>
-            
+
             <!-- Button zum logout -->
             <button onclick="window.location.href='logout.php'">Logout</button>
     </body>
@@ -151,8 +152,29 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         $_SESSION['track_index'] = ($_SESSION['track_index'] - 1 + count($tracks)) % count($tracks);
     }
 
-    $current_track = $tracks[$_SESSION['track_index']]['track'];
-    ?>
+    
+    //getAudioFeatures
+    // function getAudioFeatures($track_id) {
+    //     if (!isset($_SESSION['access_token'])) {
+    //         return ["error" => "No access token"];
+    //     }
+    
+    //     $url = API_BASE_URL . "audio-features/" . $track_id;
+    
+    //     $ch = curl_init($url);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    //         "Authorization: Bearer " . $_SESSION['access_token']
+    //     ]);
+    
+    //     $response = curl_exec($ch);
+    //     curl_close($ch);
+    
+    //     return json_decode($response, true);
+    // }
+    // $current_track = $tracks[$_SESSION['track_index']]['track'];
+    // $audio_features = getAudioFeatures($current_track['id']);
+    // ?>
 
     <!DOCTYPE html>
     <html lang="de">
@@ -186,6 +208,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
             <br>
             <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+
+
             
             <!-- Spotify Embedded Player with Autoplay -->
             <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>?autoplay=1"

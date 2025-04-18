@@ -157,88 +157,122 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Atma:wght@300;400;500;600;700&family=Ephesis&family=Funnel+Display:wght@300..800&family=Jua&family=Modak&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Atma:wght@300;400;500;600;700&family=Ephesis&family=Funnel+Display:wght@300..800&family=Jua&family=Modak&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
-        .swiper-container {
-            overflow-x: hidden;
-            scroll-snap-type: x mandatory;
+        body {
+            font-family: Arial, sans-serif;
             display: flex;
-            -webkit-overflow-scrolling: touch;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #swiper {
             position: relative;
+            width: 300px;
+            height: 400px;
         }
+
         .track-item {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
-            padding: 20px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
         }
-        img {
-            max-width: 100%;
-            height: auto;
+
+        .track-item img {
+            max-width: 80%;
+            border-radius: 10px;
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #redHeart {
+            background-color: #dc3545;
+        }
+
+        #greenHeart {
+            background-color: #28a745;
         }
     </style>
 </head>
 <body>
     <h1 id="logoAll">
         <div class="headlineTop">Beat</div>
-        <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
+        <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="">
         <div class="headlineTop">Buddy</div>
     </h1>
 
     <!-- Track Container -->
-    <div class="swiper-container">
-        <div class="track-item">
-            <img src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
-                 alt="<?= htmlspecialchars($current_track['name']) ?>">
-            <h2><?= htmlspecialchars($current_track['name']) ?></h2>
-            <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+    <div id="swiper">
+        <?php foreach ($tracks as $index => $track): ?>
+        <div class="track-item" style="z-index: <?= count($tracks) - $index ?>;">
+            <img src="<?= htmlspecialchars($track['album']['images'][0]['url'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($track['name']) ?>">
+            <h2><?= htmlspecialchars($track['name']) ?></h2>
+            <p><?= htmlspecialchars($track['artists'][0]['name']) ?></p>
         </div>
-        <!-- Fügen Sie hier weitere track-items hinzu -->
+        <?php endforeach; ?>
     </div>
 
+    <!-- Swipe Buttons -->
+    <div class="controls">
+        <button id="redHeart">Dislike</button>
+        <button id="greenHeart">Like</button>
+    </div>
+
+    <!-- JavaScript für Swipe-Mechanismus -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const container = document.querySelector('.swiper-container');
-        let startX, moveX, lastX;
-        let isDown = false;
+        const swiper = document.querySelector('#swiper');
+        const dislikeButton = document.querySelector('#redHeart');
+        const likeButton = document.querySelector('#greenHeart');
 
-        function handleStart(e) {
-            isDown = true;
-            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
-            lastX = container.scrollLeft;
+        // Funktion zum Swipen der Karte
+        function swipeCard(direction) {
+            const card = swiper.querySelector('.track-item:last-child');
+            
+            if (card) {
+                card.style.transform = `translate(${direction * window.innerWidth}px, -50px) rotate(${direction * 15}deg)`;
+                card.style.opacity = '0';
+
+                setTimeout(() => {
+                    card.remove();
+                    appendNewCard(); // Neue Karte laden (falls verfügbar)
+                }, 500);
+            }
         }
 
-        function handleMove(e) {
-            if (!isDown) return;
-            e.preventDefault();
-            moveX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
-            const x = moveX - startX;
-            container.scrollLeft = lastX - x;
+        // Funktion zum Hinzufügen neuer Karten (Platzhalter)
+        function appendNewCard() {
+            console.log('Neue Karte hinzufügen (Backend-Integration erforderlich)');
         }
 
-        function handleEnd() {
-            isDown = false;
-            const currentItem = Math.round(container.scrollLeft / container.offsetWidth);
-            container.scrollTo({
-                left: currentItem * container.offsetWidth,
-                behavior: 'smooth'
-            });
-        }
-
-        // Maus-Events
-        container.addEventListener('mousedown', handleStart);
-        container.addEventListener('mousemove', handleMove);
-        container.addEventListener('mouseup', handleEnd);
-        container.addEventListener('mouseleave', handleEnd);
-
-        // Touch-Events
-        container.addEventListener('touchstart', handleStart);
-        container.addEventListener('touchmove', handleMove);
-        container.addEventListener('touchend', handleEnd);
-    });
+        // Event Listener für die Buttons
+        dislikeButton.addEventListener('click', () => swipeCard(-1)); // Nach links wischen
+        likeButton.addEventListener('click', () => swipeCard(1)); // Nach rechts wischen
     </script>
 </body>
 </html>
+
     <?php
     exit;
 }

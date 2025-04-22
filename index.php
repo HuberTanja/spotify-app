@@ -111,7 +111,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
             <?php endforeach; ?>
 
             <!-- Button zum logout -->
-            <button onclick="window.location.href='logout.php'">Logout</button>
+            <button onclick="window.location.href='./PHP/logout.php'">Logout</button>
     </body>
     </html>
     <?php
@@ -153,28 +153,28 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     }
 
     
-    //getAudioFeatures
-    // function getAudioFeatures($track_id) {
-    //     if (!isset($_SESSION['access_token'])) {
-    //         return ["error" => "No access token"];
-    //     }
+
+     function getAudioFeatures($track_id) {
+         if (!isset($_SESSION['access_token'])) {
+             return ["error" => "No access token"];
+        }
     
-    //     $url = API_BASE_URL . "audio-features/" . $track_id;
+         $url = API_BASE_URL . "audio-features/" . $track_id;
     
-    //     $ch = curl_init($url);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    //         "Authorization: Bearer " . $_SESSION['access_token']
-    //     ]);
+         $ch = curl_init($url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+             "Authorization: Bearer " . $_SESSION['access_token']
+         ]);
     
-    //     $response = curl_exec($ch);
-    //     curl_close($ch);
+         $response = curl_exec($ch);
+         curl_close($ch);
     
-    //     return json_decode($response, true);
-    // }
-    // $current_track = $tracks[$_SESSION['track_index']]['track'];
-    // $audio_features = getAudioFeatures($current_track['id']);
-    // ?>
+         return json_decode($response, true);
+     }
+     $current_track = $tracks[$_SESSION['track_index']]['track'];
+     $audio_features = getAudioFeatures($current_track['id']);
+     ?>
 
     <!DOCTYPE html>
     <html lang="de">

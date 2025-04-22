@@ -17,7 +17,7 @@ if (sizeof($_GET) == 0) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/main.css">
+        <link rel="stylesheet" href="../style/main.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@ if (sizeof($_GET) == 0) {
     <body>
         <h1 id="logoAll">
             <div class="headlineTop">Beat</div>
-            <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
+            <img src="../Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
             <div class="headlineTop">Buddy</div>
         </h1>
         <p><a href="?action=login">Login mit Spotify</a></p>

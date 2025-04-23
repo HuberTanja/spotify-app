@@ -228,15 +228,21 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     </h1>
 
     <!-- Track Container -->
-    <div id="swiper">
-        <?php foreach ($tracks as $index => $track): ?>
-        <div class="track-item" style="z-index: <?= count($tracks) - $index ?>;">
-            <img src="<?= htmlspecialchars($track['album']['images'][0]['url'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($track['name']) ?>">
-            <h2><?= htmlspecialchars($track['name']) ?></h2>
-            <p><?= htmlspecialchars($track['artists'][0]['name']) ?></p>
+    <div class="track-container">
+            <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
+                alt="<?= htmlspecialchars($current_track['name']) ?>" 
+                width="200">
+            <br>
+            <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
+            <br>
+            <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+
+
+            
+            <!-- Spotify Embedded Player with Autoplay -->
+            <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>?autoplay=1"
+                    width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
-        <?php endforeach; ?>
-    </div>
 
     <!-- Swipe Buttons -->
     <div class="controls">

@@ -9,6 +9,89 @@ define('AUTH_URL', 'https://accounts.spotify.com/authorize');
 define('TOKEN_URL', 'https://accounts.spotify.com/api/token');
 define('API_BASE_URL', 'https://api.spotify.com/v1/');
 
+
+// --- Hilfsfunktionen ---
+function apiRequest($endpoint) {
+    $ch = curl_init(API_BASE_URL . $endpoint);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $_SESSION['access_token']
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+function apiPostRequest($url, $data) {
+    $ch = curl_init(API_BASE_URL . $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $_SESSION['access_token'],
+        'Content-Type: application/json'
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+// Funktion für Token-Anfragen
+function requestToken($grantType, $codeOrToken) {
+    $postFields = [
+        'grant_type' => $grantType,
+        'client_id' => CLIENT_ID,
+        'client_secret' => CLIENT_SECRET,
+    ];
+    if ($grantType === 'authorization_code') {
+        $postFields['code'] = $codeOrToken;
+        $postFields['redirect_uri'] = REDIRECT_URI;
+    } else {
+        $postFields['refresh_token'] = $codeOrToken;
+    }
+
+    $ch = curl_init(TOKEN_URL);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postFields));
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+
+
+
+if (isset($_GET['action']) && $_GET['action'] == 'create-playlist') {
+    if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
+        header("Location: ?action=refresh-token");
+        exit;
+    }
+
+    // Hole Benutzer-ID
+    $user = apiRequest('me');
+    $user_id = $user['id'];
+
+    // Playlist-Daten
+    $playlistData = [
+        "name" => "Meine neue Playlist",
+        "description" => "Erstellt mit BeatBuddy App",
+        "public" => false
+    ];
+
+    // POST an Spotify senden
+   
+    $newPlaylist = apiPostRequest("users/{$user_id}/playlists", $playlistData);
+    if (isset($newPlaylist['id'])) {
+        header("Location: ?action=playlist&id=" . $newPlaylist['id']);
+    } else {
+        echo "<p>Fehler beim Erstellen der Playlist.</p><pre>" . print_r($newPlaylist, true) . "</pre>";
+    }
+    exit;
+}
+
+
+
 // Startseite mit Login-Link
 if (sizeof($_GET) == 0) {
     ?>
@@ -32,6 +115,7 @@ if (sizeof($_GET) == 0) {
             <div class="headlineTop">Buddy</div>
         </h1>
         <p><a href="?action=login">Login mit Spotify</a></p>
+
     </body>
     </html>
     <?php
@@ -40,7 +124,8 @@ if (sizeof($_GET) == 0) {
 
 // Login: Weiterleitung zur Spotify-Authentifizierung
 if (isset($_GET['action']) && $_GET['action'] == 'login') {
-    $scope = 'user-read-private user-read-email playlist-read-private';
+ //$scope = 'user-read-private user-read-email playlist-read-private';
+ $scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email playlist-read-private';
     $auth_url = AUTH_URL . "?" . http_build_query([
         'client_id' => CLIENT_ID,
         'response_type' => 'code',
@@ -51,6 +136,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'login') {
     header("Location: $auth_url");
     exit;
 }
+
+
 
 // Callback: Verarbeitet die Rückmeldung von Spotify
 if (isset($_GET['action']) && $_GET['action'] == 'callback') {
@@ -101,6 +188,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
         <title>Deine Spotify Playlists</title>
     </head>
     <body>
+        <p><a href="?action=create-playlist">➕ Neue Playlist erstellen</a></p>
         <h1>Deine Playlists</h1>
             <?php foreach ($playlists['items'] as $playlist): ?>
                     <a href="?action=playlist&id=<?= $playlist['id'] ?>">
@@ -220,6 +308,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
         </div>
+        <!-- HTML-Button: Songs zur Playlist hinzufügen -->
+<form action="" method="get">
+            <input type="hidden" name="action" value="add-to-playlist">
+            <input type="hidden" name="track_id" value="<?= $current_track['id'] ?>">
+            <button type="submit">🎵 Song zu "Meine neue Playlist" hinzufügen</button>
+        </form>
 
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
     </body>
@@ -248,40 +342,43 @@ if (isset($_GET['action']) && $_GET['action'] == 'refresh-token') {
     header("Location: ?action=playlists");
     exit;
 }
-
-// Funktion für Token-Anfragen
-function requestToken($grantType, $codeOrToken) {
-    $postFields = [
-        'grant_type' => $grantType,
-        'client_id' => CLIENT_ID,
-        'client_secret' => CLIENT_SECRET,
-    ];
-    if ($grantType === 'authorization_code') {
-        $postFields['code'] = $codeOrToken;
-        $postFields['redirect_uri'] = REDIRECT_URI;
-    } else {
-        $postFields['refresh_token'] = $codeOrToken;
+if (isset($_GET['action']) && $_GET['action'] == 'add-to-playlist') {
+    if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
+        header("Location: ?action=refresh-token");
+        exit;
     }
 
-    $ch = curl_init(TOKEN_URL);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postFields));
-    
-    $response = curl_exec($ch);
-    curl_close($ch);
-    return json_decode($response, true);
+
+      if (!isset($_GET['track_id'])) {
+        echo "<p>Kein Track angegeben.</p>";
+        exit;
+    }
+    $track_id = $_GET['track_id'];
+    $track_uri = "spotify:track:" . $track_id;
+
+    // Suche nach "Meine neue Playlist"
+    $playlists = apiRequest('me/playlists');
+    $playlist_id = null;
+    foreach ($playlists['items'] as $playlist) {
+        if ($playlist['name'] === 'Meine neue Playlist') {
+            $playlist_id = $playlist['id'];
+            break;
+        }
+    }
+
+
+
+       $result = apiPostRequest("playlists/{$playlist_id}/tracks", [
+        "uris" => [$track_uri],
+        "position" => 0
+    ]);
+
+    if (isset($result['snapshot_id'])) {
+        echo "<p>Song wurde erfolgreich hinzugefügt!</p>";
+    } else {
+        echo "<p>Fehler beim Hinzufügen des Songs.</p><pre>" . print_r($result, true) . "</pre>";
+    }
+    echo '<p><a href="?action=playlists">Zurück</a></p>';
+    exit;
 }
 
-// Funktion für API-Anfragen
-function apiRequest($endpoint) {
-    $ch = curl_init(API_BASE_URL . $endpoint);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Authorization: Bearer ' . $_SESSION['access_token']
-    ]);
-    
-    $response = curl_exec($ch);
-    curl_close($ch);
-    return json_decode($response, true);
-}

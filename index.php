@@ -340,7 +340,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             }
             </style>
 
-<<<<<<< HEAD
         <div class="controls">
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
             <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
@@ -351,7 +350,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <input type="hidden" name="track_id" value="<?= $current_track['id'] ?>">
             <button type="submit">🎵 Song zu "Meine neue Playlist" hinzufügen</button>
         </form>
-=======
+
             <div class="track-container" id="trackBox">
                 <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
                     alt="<?= htmlspecialchars($current_track['name']) ?>" 
@@ -411,8 +410,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
                 trackBox.classList.add('swipe-out-left');
                 goToNext('next');
             } else if (currentX > 120) {
-                trackBox.classList.ad
->>>>>>> 405f7b243717f4c77968a48d706f4bc9755787f7
+                trackBox.classList.add('swipe-out-right');
+            }
+        }
+        </script>
 
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
     </body>

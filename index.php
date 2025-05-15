@@ -412,7 +412,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             } else if (currentX > 120) {
                 trackBox.classList.add('swipe-out-right');
             }
-        }
+        })
         </script>
 
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>

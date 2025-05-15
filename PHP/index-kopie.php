@@ -228,52 +228,172 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     </h1>
 
     <!-- Track Container -->
-    <div id="swiper">
-        <?php foreach ($tracks as $index => $track): ?>
-        <div class="track-item" style="z-index: <?= count($tracks) - $index ?>;">
-            <img src="<?= htmlspecialchars($track['album']['images'][0]['url'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($track['name']) ?>">
-            <h2><?= htmlspecialchars($track['name']) ?></h2>
-            <p><?= htmlspecialchars($track['artists'][0]['name']) ?></p>
-        </div>
-        <?php endforeach; ?>
-    </div>
+<style>
+.track-container {
+  position: relative;
+  width: 320px;
+  margin: 40px auto 20px auto;
+  background: #181818;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  padding: 24px 10px 20px 10px;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+  will-change: transform, opacity;
+  touch-action: pan-x;
+  user-select: none;
+}
 
-    <!-- Swipe Buttons -->
-    <div class="controls">
-        <button id="redHeart">Dislike</button>
-        <button id="greenHeart">Like</button>
-    </div>
+.swipe-out-left {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+  transform: translateX(-500px) rotate(-25deg);
+  opacity: 0;
+}
 
-    <!-- JavaScript für Swipe-Mechanismus -->
-    <script>
-        const swiper = document.querySelector('#swiper');
-        const dislikeButton = document.querySelector('#redHeart');
-        const likeButton = document.querySelector('#greenHeart');
+.swipe-out-right {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+  transform: translateX(500px) rotate(25deg);
+  opacity: 0;
+}
 
-        // Funktion zum Swipen der Karte
-        function swipeCard(direction) {
-            const card = swiper.querySelector('.track-item:last-child');
-            
-            if (card) {
-                card.style.transform = `translate(${direction * window.innerWidth}px, -50px) rotate(${direction * 15}deg)`;
-                card.style.opacity = '0';
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 10px 0 40px 0;
+}
 
-                setTimeout(() => {
-                    card.remove();
-                    appendNewCard(); // Neue Karte laden (falls verfügbar)
-                }, 500);
-            }
-        }
+button#redHeart, button#greenHeart {
+  font-size: 1.2em;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
-        // Funktion zum Hinzufügen neuer Karten (Platzhalter)
-        function appendNewCard() {
-            console.log('Neue Karte hinzufügen (Backend-Integration erforderlich)');
-        }
+button#redHeart {
+  background: #ff4e4e;
+  color: #fff;
+}
 
-        // Event Listener für die Buttons
-        dislikeButton.addEventListener('click', () => swipeCard(-1)); // Nach links wischen
-        likeButton.addEventListener('click', () => swipeCard(1)); // Nach rechts wischen
-    </script>
+button#greenHeart {
+  background: #1db954;
+  color: #fff;
+}
+</style>
+
+<div class="track-container" id="trackBox">
+    <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
+        alt="<?= htmlspecialchars($current_track['name']) ?>" 
+        width="200">
+    <br>
+    <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
+    <br>
+    <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+    <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>?autoplay=1"
+            width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+</div>
+
+<div class="controls">
+    <button id="redHeart">Dislike</button>
+    <button id="greenHeart">Like</button>
+</div>
+
+<script>
+const trackBox = document.getElementById('trackBox');
+const redHeart = document.getElementById('redHeart');
+const greenHeart = document.getElementById('greenHeart');
+const playlistId = "<?= htmlspecialchars($_GET['id']) ?>"; // aktuelle Playlist-ID
+
+// ---- SWIPE MECHANISMUS ----
+let isDragging = false;
+let startX = 0;
+let currentX = 0;
+
+function setTransform(x) {
+  trackBox.style.transform = `translateX(${x}px) rotate(${x/20}deg)`;
+  trackBox.style.opacity = 1 - Math.min(Math.abs(x)/400, 0.7);
+}
+
+// Nach Animation: Weiter zum nächsten Song
+function goToNext(nav) {
+  setTimeout(() => {
+    window.location.href = "?action=playlist&id=" + playlistId + "&nav=" + nav;
+  }, 400); // muss zur CSS-Transition passen
+}
+
+// Maus
+trackBox.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  startX = e.clientX;
+  trackBox.style.transition = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  currentX = e.clientX - startX;
+  setTransform(currentX);
+});
+
+document.addEventListener('mouseup', (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  trackBox.style.transition = '';
+  if (currentX < -120) {
+    trackBox.classList.add('swipe-out-left');
+    goToNext('next');
+  } else if (currentX > 120) {
+    trackBox.classList.add('swipe-out-right');
+    goToNext('next');
+  } else {
+    trackBox.style.transform = '';
+    trackBox.style.opacity = '';
+  }
+  currentX = 0;
+});
+
+// Touch
+trackBox.addEventListener('touchstart', (e) => {
+  isDragging = true;
+  startX = e.touches[0].clientX;
+  trackBox.style.transition = 'none';
+});
+
+trackBox.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
+  currentX = e.touches[0].clientX - startX;
+  setTransform(currentX);
+});
+
+trackBox.addEventListener('touchend', (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  trackBox.style.transition = '';
+  if (currentX < -120) {
+    trackBox.classList.add('swipe-out-left');
+    goToNext('next');
+  } else if (currentX > 120) {
+    trackBox.classList.add('swipe-out-right');
+    goToNext('next');
+  } else {
+    trackBox.style.transform = '';
+    trackBox.style.opacity = '';
+  }
+  currentX = 0;
+});
+
+// BUTTONS
+redHeart.addEventListener('click', () => {
+  trackBox.classList.add('swipe-out-left');
+  goToNext('next');
+});
+greenHeart.addEventListener('click', () => {
+  trackBox.classList.add('swipe-out-right');
+  goToNext('next');
+});
+</script>
+
 </body>
 </html>
 

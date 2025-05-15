@@ -340,6 +340,18 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             }
             </style>
 
+<<<<<<< HEAD
+        <div class="controls">
+            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
+            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
+        </div>
+        <!-- HTML-Button: Songs zur Playlist hinzufügen -->
+<form action="" method="get">
+            <input type="hidden" name="action" value="add-to-playlist">
+            <input type="hidden" name="track_id" value="<?= $current_track['id'] ?>">
+            <button type="submit">🎵 Song zu "Meine neue Playlist" hinzufügen</button>
+        </form>
+=======
             <div class="track-container" id="trackBox">
                 <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
                     alt="<?= htmlspecialchars($current_track['name']) ?>" 
@@ -352,10 +364,55 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
                         width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
 
-        <div class="controls">
-            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
-            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
-        </div>
+            <div class="controls">
+                <img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart">
+                <img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart">
+            </div>
+
+            <script>
+            const trackBox = document.getElementById('trackBox');
+            const redHeart = document.getElementById('redHeart');
+            const greenHeart = document.getElementById('greenHeart');
+            const playlistId = "<?= htmlspecialchars($_GET['id']) ?>"; // aktuelle Playlist-ID
+
+            // ---- SWIPE MECHANISMUS ----
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+
+            function setTransform(x) {
+                trackBox.style.transform = `translateX(${x}px) rotate(${x/20}deg)`;
+                trackBox.style.opacity = 1 - Math.min(Math.abs(x)/400, 0.7);
+            }
+            // Nach Animation: Weiter zum nächsten Song
+            function goToNext(nav) {
+                setTimeout(() => {
+                    window.location.href = "?action=playlist&id=" + playlistId + "&nav=" + nav;
+                }, 400); // muss zur CSS-Transition passen
+            }
+            // Maus
+            trackBox.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                trackBox.style.transition = 'none';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                currentX = e.clientX - startX;
+                setTransform(currentX);
+            });
+
+            document.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            trackBox.style.transition = '';
+            if (currentX < -120) {
+                trackBox.classList.add('swipe-out-left');
+                goToNext('next');
+            } else if (currentX > 120) {
+                trackBox.classList.ad
+>>>>>>> 405f7b243717f4c77968a48d706f4bc9755787f7
 
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
     </body>

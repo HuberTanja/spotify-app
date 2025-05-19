@@ -288,69 +288,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
             <div class="headlineTop">Buddy</div>
         </h1>
-
-
-        <!-- Track Container - Entire Swipe Mechanism -->
-        <style>
-            .track-container {
-                position: relative;
-                width: 320px;
-                margin: 40px auto 20px auto;
-                background: #181818;
-                border-radius: 18px;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-                padding: 24px 10px 20px 10px;
-                text-align: center;
-                transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
-                will-change: transform, opacity;
-                touch-action: pan-x;
-                user-select: none;
-            }
-            .swipe-out-left {
-                transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
-                transform: translateX(-500px) rotate(-25deg);
-                opacity: 0;
-            }
-            .swipe-out-right {
-                transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
-                transform: translateX(500px) rotate(25deg);
-                opacity: 0;
-            }
-            .controls {
-                display: flex;
-                justify-content: center;
-                gap: 30px;
-                margin: 10px 0 40px 0;
-            }
-            button#redHeart, button#greenHeart {
-                font-size: 1.2em;
-                padding: 12px 24px;
-                border: none;
-                border-radius: 30px;
-                cursor: pointer;
-                transition: all 0.2s;
-            }
-            button#redHeart {
-                background: #ff4e4e;
-                color: #fff;
-            }
-            button#greenHeart {
-                background: #1db954;
-                color: #fff;
-            }
-            </style>
-
-        <div class="controls">
-            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
-            <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
-        </div>
-        <!-- HTML-Button: Songs zur Playlist hinzufügen -->
-<form action="" method="get">
+        <form action="" method="get">
             <input type="hidden" name="action" value="add-to-playlist">
             <input type="hidden" name="track_id" value="<?= $current_track['id'] ?>">
             <button type="submit">🎵 Song zu "Meine neue Playlist" hinzufügen</button>
         </form>
 
+        <!-- Track Container - Entire Swipe Mechanism -->
             <div class="track-container" id="trackBox">
                 <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
                     alt="<?= htmlspecialchars($current_track['name']) ?>" 
@@ -363,9 +307,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
                         width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
 
-            <div class="controls">
-                <img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart">
-                <img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart">
+            <!-- Buttons zum Swipen -->
+             <div class="controls">
+                <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
+                <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
             </div>
 
             <script>
@@ -411,8 +356,51 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
                 goToNext('next');
             } else if (currentX > 120) {
                 trackBox.classList.add('swipe-out-right');
+                goToNext('next');
+            } else {
+                trackBox.style.transform = '';
+                trackBox.style.opacity = '';
             }
-        })
+            currentX = 0;
+            });
+
+            // Touch
+            trackBox.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                trackBox.style.transition = 'none';
+            });
+            trackBox.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                currentX = e.touches[0].clientX - startX;
+                setTransform(currentX);
+            });
+            trackBox.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            trackBox.style.transition = '';
+            if (currentX < -120) {
+                trackBox.classList.add('swipe-out-left');
+                goToNext('next');
+            } else if (currentX > 120) {
+                trackBox.classList.add('swipe-out-right');
+                goToNext('next');
+            } else {
+                trackBox.style.transform = '';
+                trackBox.style.opacity = '';
+            }
+            currentX = 0;
+            });
+
+            // BUTTONS
+            redHeart.addEventListener('click', () => {
+                trackBox.classList.add('swipe-out-left');
+                goToNext('next');
+            });
+            greenHeart.addEventListener('click', () => {
+                trackBox.classList.add('swipe-out-right');
+                goToNext('next');
+            });
         </script>
 
         <p><a href="?action=playlists">Zurück zu den Playlists</a></p>

@@ -74,7 +74,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'create-playlist') {
 
     // Playlist-Daten
     $playlistData = [
-        "name" => "Meine neue Playlist",
+        "name" => "BeatBuddy Playlist",
         "description" => "Erstellt mit BeatBuddy App",
         "public" => false
     ];

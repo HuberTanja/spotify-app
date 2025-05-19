@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2024-12-01" view-index="0" gantt-divider-location="311" resource-divider-location="300" version="3.3.3312" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2024-12-01" view-index="0" gantt-divider-location="290" resource-divider-location="300" version="3.3.3312" locale="de_DE">
     <description/>
     <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="158" order="0"/>
-        <field id="tpd4" name="Anfang" width="67" order="1"/>
-        <field id="tpd5" name="Ende" width="69" order="2"/>
+        <field id="tpd3" name="Vorgang" width="144" order="0"/>
+        <field id="tpd4" name="Anfang" width="63" order="1"/>
+        <field id="tpd5" name="Ende" width="66" order="2"/>
         <field id="tpd15" name="Notizen" width="20" order="3"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
@@ -66,11 +66,11 @@
             </task>
         </task>
         <task id="36" uid="b275e76013eb4e5bbad3e2517e0dd613" name="Swipe Mechanismus Design" meeting="true" start="2025-04-21" duration="0" complete="0" expand="true"/>
-        <task id="3" uid="ac744bae22fb4101a060de06f30a95db" name="Frontend-Entwicklung" meeting="false" start="2025-04-28" duration="31" complete="0" expand="false">
-            <task id="13" uid="d57f67bfb3f04098bbcfbb2f6fb71ca4" name="Design mittels HTML, CSS, JS implementieren" meeting="false" start="2025-04-28" duration="20" complete="0" thirdDate="2025-04-28" thirdDate-constraint="1" expand="true">
+        <task id="3" uid="ac744bae22fb4101a060de06f30a95db" name="Frontend-Entwicklung" meeting="false" start="2025-04-28" duration="31" complete="65" expand="true">
+            <task id="13" uid="d57f67bfb3f04098bbcfbb2f6fb71ca4" name="Design mittels HTML, CSS, JS implementieren" meeting="false" start="2025-04-28" duration="20" complete="75" thirdDate="2025-04-28" thirdDate-constraint="1" expand="true">
                 <depend id="14" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="14" uid="c26cb6c2dc8442a79809a7ebaec5ce02" name="App für mobile Nutzung" meeting="false" start="2025-05-27" duration="10" complete="0" thirdDate="2025-05-20" thirdDate-constraint="1" expand="true">
+            <task id="14" uid="c26cb6c2dc8442a79809a7ebaec5ce02" name="App für mobile Nutzung" meeting="false" start="2025-05-27" duration="10" complete="45" thirdDate="2025-05-20" thirdDate-constraint="1" expand="true">
                 <depend id="29" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
@@ -84,21 +84,21 @@
             </task>
         </task>
         <task id="38" uid="47b384203e6a4a80970a93cb8ea624c3" name="Backend-Integration" meeting="true" start="2025-02-25" duration="0" complete="0" expand="true"/>
-        <task id="18" uid="87a6a597c361472581d784f7ea9558ff" name="Swipe-Mechanismus" meeting="false" start="2025-02-26" duration="20" complete="71" expand="true">
+        <task id="18" uid="87a6a597c361472581d784f7ea9558ff" name="Swipe-Mechanismus" meeting="false" start="2025-02-26" duration="20" complete="100" expand="true">
             <task id="19" uid="307f9c1fad49454a8d4785c0028c34c5" name="Click-Event integrieren" meeting="false" start="2025-02-26" duration="10" complete="100" thirdDate="2025-02-25" thirdDate-constraint="1" expand="true">
                 <depend id="20" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="33" uid="02c0b7c4ebc44268b879955f88b7c7d4" name="Swipefunktion - Playlistspeicherung" meeting="false" start="2025-03-12" duration="10" complete="40" expand="true"/>
+            <task id="33" uid="02c0b7c4ebc44268b879955f88b7c7d4" name="Swipefunktion - Playlistspeicherung" meeting="false" start="2025-03-12" duration="10" complete="100" expand="true"/>
             <task id="20" uid="0dcc653b860446a98dda65b2946aa105" name="Swipen testen und Debuggen" meeting="false" start="2025-03-13" duration="1" complete="100" thirdDate="2025-03-13" thirdDate-constraint="1" expand="true">
                 <depend id="22" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
         <task id="39" uid="82596f723aa247de90a88201a9335707" name="Swipe Mechanismus" meeting="true" start="2025-03-25" duration="0" complete="0" expand="true"/>
-        <task id="21" uid="2c05144603c642369b8adf76bc25ff59" name="Designfinalisierung" meeting="false" start="2025-03-14" duration="28" complete="55" expand="true">
-            <task id="22" uid="4918745846ac4ba6b2899b4b2692bf49" name="Visuelle Elemente anpassen" meeting="false" start="2025-03-14" duration="14" complete="70" thirdDate="2025-03-14" thirdDate-constraint="1" expand="true">
+        <task id="21" uid="2c05144603c642369b8adf76bc25ff59" name="Designfinalisierung" meeting="false" start="2025-03-14" duration="28" complete="90" expand="true">
+            <task id="22" uid="4918745846ac4ba6b2899b4b2692bf49" name="Visuelle Elemente anpassen" meeting="false" start="2025-03-14" duration="14" complete="100" thirdDate="2025-03-14" thirdDate-constraint="1" expand="true">
                 <depend id="24" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="24" uid="81d44002e14e49cebb368b2192393ad2" name="Responsive Design überprüfen" meeting="false" start="2025-04-03" duration="14" complete="40" thirdDate="2025-04-01" thirdDate-constraint="1" expand="true">
+            <task id="24" uid="81d44002e14e49cebb368b2192393ad2" name="Responsive Design überprüfen" meeting="false" start="2025-04-03" duration="14" complete="80" thirdDate="2025-04-01" thirdDate-constraint="1" expand="true">
                 <depend id="26" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
@@ -112,7 +112,7 @@
             </task>
         </task>
         <task id="41" uid="9ba09c9904c7426eb18fd6a124ff842a" name="Testphase" meeting="true" start="2025-05-26" duration="0" complete="0" expand="true"/>
-        <task id="28" uid="fd8412ab977e45a5a1ad3b5d062b372d" name="Adgabe" meeting="false" start="2025-06-10" duration="9" complete="0" expand="false">
+        <task id="28" uid="fd8412ab977e45a5a1ad3b5d062b372d" name="Adgabe" meeting="false" start="2025-06-10" duration="9" complete="0" expand="true">
             <task id="29" uid="70f7f3a52f9548258a885e35d4c5116d" name="Projektdokumentattion erstellen" meeting="false" start="2025-06-10" duration="5" complete="0" expand="true">
                 <depend id="30" type="2" difference="0" hardness="Strong"/>
             </task>

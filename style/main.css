@@ -179,3 +179,51 @@ a:hover {
 #backimg3 { bottom: -5%; left: 97%; }
 #backimg4 { bottom: 0%; right: 80%; transform: translate(-20%, -20%);}
 #backimg5 { top: 0%; left: 8%; }
+
+/* Swipe Mechanismus */
+.track-container {
+    position: relative;
+    width: 320px;
+    margin: 40px auto 20px auto;
+    background: #181818;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    padding: 24px 10px 20px 10px;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+    will-change: transform, opacity;
+    touch-action: pan-x;
+    user-select: none;
+}
+.swipe-out-left {
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+    transform: translateX(-500px) rotate(-25deg);
+    opacity: 0;
+}
+.swipe-out-right {
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+    transform: translateX(500px) rotate(25deg);
+    opacity: 0;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 10px 0 40px 0;
+}
+button#redHeart, button#greenHeart {
+    font-size: 1.2em;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+button#redHeart {
+    background: #ff4e4e;
+    color: #fff;
+}
+button#greenHeart {
+    background: #1db954;
+    color: #fff;
+}

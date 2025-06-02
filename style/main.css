@@ -176,11 +176,11 @@ a:hover {
 }
 
 /* Zufällige Positionierung am Rand */
-#backimg1 { top: 90%; left: 90%; transform: translate(-50%, -50%); }
+#backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); }
 #backimg2 { top: 6%; right: -10%; }
-#backimg3 { bottom: -5%; left: 85%; }
-#backimg4 { bottom: 0%; right: 80%; transform: translate(-20%, -20%);}
-#backimg5 { top: 0%; left: 8%; }
+#backimg3 { bottom: 50%; left: 85%; }
+#backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg);}
+#backimg5 { top: 0%; left: -10%; }
 
 /* Swipe Mechanismus */
 .track-container {

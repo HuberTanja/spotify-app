@@ -291,7 +291,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <form action="" method="get">
             <input type="hidden" name="action" value="add-to-playlist">
             <input type="hidden" name="track_id" value="<?= $current_track['id'] ?>">
-            <button type="submit">🎵 Song zu "Meine neue Playlist" hinzufügen</button>
+            <button type="submit" style="display: none;">🎵 Song zu "Meine neue Playlist" hinzufügen</button>
         </form>
 
         <!-- Track Container - Entire Swipe Mechanism -->
@@ -403,7 +403,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             });
         </script>
 
-        <p><a href="?action=playlists">Zurück zu den Playlists</a></p>
+        
+        <p><a href="?action=playlists" style="display: none;">Zurück zu den Playlists</a></p>
     </body>
     </html>
     <?php

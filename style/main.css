@@ -40,6 +40,8 @@ body {
     text-align: center;
     padding: 40px;
     margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 /*** Headline TOP ***/
@@ -176,7 +178,7 @@ a:hover {
 /* Zufällige Positionierung am Rand */
 #backimg1 { top: 90%; left: 90%; transform: translate(-50%, -50%); }
 #backimg2 { top: 6%; right: -10%; }
-#backimg3 { bottom: -5%; left: 97%; }
+#backimg3 { bottom: -5%; left: 85%; }
 #backimg4 { bottom: 0%; right: 80%; transform: translate(-20%, -20%);}
 #backimg5 { top: 0%; left: 8%; }
 

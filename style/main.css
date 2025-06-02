@@ -39,9 +39,13 @@ body {
     color: var(--black-color);
     text-align: center;
     padding: 40px;
-    margin: 0;
     overflow-y: hidden;
     overflow-x: hidden;
+    width: 375px;
+    margin: 0 auto;
+    border: 1px solid #ccc; /* optional, um Rahmen zu sehen */
+    height: 100vh;
+    overflow: auto;
 }
 
 /*** Headline TOP ***/

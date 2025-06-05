@@ -4,7 +4,7 @@ session_start();
 // Spotify API-Konfigurationsvariablen
 define('CLIENT_ID', '2fe3ce085edc4366a2f227b368baa7e3');
 define('CLIENT_SECRET', '6c264ec7f8f44c5ca7b7a62b9e0562f4');
-define('REDIRECT_URI', 'http://beatbuddy.42web.io/index.php?action=callback');
+define('REDIRECT_URI', 'http://localhost:8080/spotify-app/index.php?action=callback');
 define('AUTH_URL', 'https://accounts.spotify.com/authorize');
 define('TOKEN_URL', 'https://accounts.spotify.com/api/token');
 define('API_BASE_URL', 'https://api.spotify.com/v1/');

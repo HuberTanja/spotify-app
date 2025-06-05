@@ -46,9 +46,7 @@ body {
     height: 100vh;
 }
 
-*{
-    overflow-x: hidden !important;
-}
+
 
 /*** Headline TOP ***/
 #headlineTop image {

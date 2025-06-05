@@ -469,4 +469,3 @@ if (isset($_GET['action']) && $_GET['action'] == 'add-to-playlist') {
     echo '<p><a href="?action=playlists">Zurück</a></p>';
     exit;
 }
-

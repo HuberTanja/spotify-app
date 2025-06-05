@@ -180,11 +180,11 @@ a:hover {
 }
 
 /* Zufällige Positionierung am Rand */
-#backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); }
-#backimg2 { top: 6%; right: -10%; }
-#backimg3 { bottom: 50%; left: 85%; }
-#backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg);}
-#backimg5 { top: 0%; left: -10%; }
+#backimg1 { display: none; }
+#backimg2 { display: none; }
+#backimg3 { display: none; }
+#backimg4 { display: none; }
+#backimg5 { display: none; }
 
 /* Swipe Mechanismus */
 .track-container {
@@ -232,4 +232,14 @@ button#redHeart {
 button#greenHeart {
     background: #1db954;
     color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+    /* Zufällige Positionierung am Rand */
+    #backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); display: flex; }
+    #backimg2 { top: 6%; right: -10%; display: flex; }
+    #backimg3 { bottom: 50%; left: 85%; display: flex; }
+    #backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg); display: flex;}
+    #backimg5 { top: 0%; left: -10%; display: flex;}
+
 }

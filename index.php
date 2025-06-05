@@ -261,7 +261,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
          return json_decode($response, true);
      }
      $current_track = $tracks[$_SESSION['track_index']]['track'];
-     $audio_features = getAudioFeatures($current_track['id']);
      ?>
 
     <!DOCTYPE html>

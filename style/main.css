@@ -34,7 +34,7 @@ font-style: normal;
   
 /*** ALLGEMEIN ***/
 body {
-    overflow: hidden !important;
+    overflow-x: hidden !important;
     font-family: Arial, sans-serif;
     background-color: var(--white-color);
     color: var(--black-color);
@@ -46,6 +46,9 @@ body {
     height: 100vh;
 }
 
+*{
+    overflow-x: hidden !important;
+}
 
 /*** Headline TOP ***/
 #headlineTop image {

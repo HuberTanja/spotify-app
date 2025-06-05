@@ -34,6 +34,7 @@ font-style: normal;
   
 /*** ALLGEMEIN ***/
 body {
+    overflow: hidden !important;
     font-family: Arial, sans-serif;
     background-color: var(--white-color);
     color: var(--black-color);
@@ -43,7 +44,6 @@ body {
     margin: 0 auto;
     
     height: 100vh;
-    overflow: hidden;
 }
 
 

@@ -256,10 +256,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
             <div class="headlineTop">Buddy</div>
         </h1>
-        <button onclick="addToBeatBuddy('<?= $current_track['id'] ?>')">
-    🎵 Song zu 'BeatBuddy' hinzufügen
-</button>
-<p id="add-status-<?= $current_track['id'] ?>"></p>
 
 <script>
 function addToBeatBuddy(trackId) {
@@ -344,9 +340,11 @@ function addToBeatBuddy(trackId) {
                 trackBox.classList.add('swipe-out-left');
                 goToNext('next');
             } else if (currentX > 120) {
-                trackBox.classList.add('swipe-out-right');
-                goToNext('next');
-            } else {
+    addToBeatBuddy('<?= $current_track['id'] ?>');
+    trackBox.classList.add('swipe-out-right');
+    goToNext('next');
+}
+ else {
                 trackBox.style.transform = '';
                 trackBox.style.opacity = '';
             }
@@ -386,10 +384,12 @@ function addToBeatBuddy(trackId) {
                 trackBox.classList.add('swipe-out-left');
                 goToNext('next');
             });
-            greenHeart.addEventListener('click', () => {
-                trackBox.classList.add('swipe-out-right');
-                goToNext('next');
-            });
+          greenHeart.addEventListener('click', () => {
+    addToBeatBuddy('<?= $current_track['id'] ?>'); // call your function
+    trackBox.classList.add('swipe-out-right');
+    goToNext('next');
+});
+
         </script>
 
         

@@ -59,39 +59,6 @@ function requestToken($grantType, $codeOrToken) {
     return json_decode($response, true);
 }
 
-
-
-
-if (isset($_GET['action']) && $_GET['action'] == 'create-playlist') {
-    if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
-        header("Location: ?action=refresh-token");
-        exit;
-    }
-
-    // Hole Benutzer-ID
-    $user = apiRequest('me');
-    $user_id = $user['id'];
-
-    // Playlist-Daten
-    $playlistData = [
-        "name" => "BeatBuddy Playlist",
-        "description" => "Erstellt mit BeatBuddy App",
-        "public" => false
-    ];
-
-    // POST an Spotify senden
-   
-    $newPlaylist = apiPostRequest("users/{$user_id}/playlists", $playlistData);
-    if (isset($newPlaylist['id'])) {
-        header("Location: ?action=playlist&id=" . $newPlaylist['id']);
-    } else {
-        echo "<p>Fehler beim Erstellen der Playlist.</p><pre>" . print_r($newPlaylist, true) . "</pre>";
-    }
-    exit;
-}
-
-
-
 // Startseite mit Login-Link
 if (sizeof($_GET) == 0) {
     ?>
@@ -188,7 +155,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
         <title>Deine Spotify Playlists</title>
     </head>
     <body>
-        <p><a href="?action=create-playlist">➕ Neue Playlist erstellen</a></p>
+     
         <h1>Deine Playlists</h1>
             <?php foreach ($playlists['items'] as $playlist): ?>
                     <a href="?action=playlist&id=<?= $playlist['id'] ?>">
@@ -205,6 +172,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
     <?php
     exit;
 }
+
+
 
 // Einzelne Playlist abrufen
 if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
@@ -287,11 +256,32 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
             <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
             <div class="headlineTop">Buddy</div>
         </h1>
-        <form action="" method="get">
-            <input type="hidden" name="action" value="add-to-playlist">
-            <input type="hidden" name="track_id" value="<?= $current_track['id'] ?>">
-            <button type="submit" style="display: none;">🎵 Song zu "Meine neue Playlist" hinzufügen</button>
-        </form>
+        <button onclick="addToBeatBuddy('<?= $current_track['id'] ?>')">
+    🎵 Song zu 'BeatBuddy' hinzufügen
+</button>
+<p id="add-status-<?= $current_track['id'] ?>"></p>
+
+<script>
+function addToBeatBuddy(trackId) {
+    fetch('?action=add-to-playlist&track_id=' + trackId, {
+        headers: { 'X-Requested-With': 'fetch' }
+    })
+    .then(res => res.json())
+    .then(data => {
+        const statusEl = document.getElementById('add-status-' + trackId);
+        if (data.success) {
+            statusEl.innerText = "✅ Song wurde hinzugefügt!";
+        } else {
+            statusEl.innerText = "❌ Fehler: " + data.message;
+        }
+    })
+    .catch(error => {
+        const statusEl = document.getElementById('add-status-' + trackId);
+        statusEl.innerText = "❌ Netzwerkfehler.";
+        console.error("Fehler:", error);
+    });
+}
+</script>
 
         <!-- Track Container - Entire Swipe Mechanism -->
             <div class="track-container" id="trackBox">
@@ -430,42 +420,86 @@ if (isset($_GET['action']) && $_GET['action'] == 'refresh-token') {
     header("Location: ?action=playlists");
     exit;
 }
+
 if (isset($_GET['action']) && $_GET['action'] == 'add-to-playlist') {
+    // Prüfen ob es ein fetch()-Request ist (AJAX)
+    $is_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'fetch';
+
     if (!isset($_SESSION['access_token']) || time() > $_SESSION['expires_at']) {
-        header("Location: ?action=refresh-token");
+        if ($is_ajax) {
+            echo json_encode(["success" => false, "message" => "Zugriff abgelaufen"]);
+        } else {
+            header("Location: ?action=refresh-token");
+        }
         exit;
     }
 
-
-      if (!isset($_GET['track_id'])) {
-        echo "<p>Kein Track angegeben.</p>";
+    if (!isset($_GET['track_id'])) {
+        $msg = "Kein Track angegeben.";
+        if ($is_ajax) {
+            echo json_encode(["success" => false, "message" => $msg]);
+        } else {
+            echo "<p>$msg</p>";
+        }
         exit;
     }
+
     $track_id = $_GET['track_id'];
     $track_uri = "spotify:track:" . $track_id;
 
-    // Suche nach "Meine neue Playlist"
+    // 1. Playlist suchen
     $playlists = apiRequest('me/playlists');
     $playlist_id = null;
     foreach ($playlists['items'] as $playlist) {
-        if ($playlist['name'] === 'Meine neue Playlist') {
+        if ($playlist['name'] === 'BeatBuddy') {
             $playlist_id = $playlist['id'];
             break;
         }
     }
 
+    // 2. Playlist erstellen falls nötig
+    if (!$playlist_id) {
+        $user = apiRequest('me');
+        $create = apiPostRequest("users/{$user['id']}/playlists", [
+            "name" => "BeatBuddy",
+            "description" => "Erstellt durch deine App",
+            "public" => false
+        ]);
+        if (isset($create['id'])) {
+            $playlist_id = $create['id'];
+        } else {
+            $msg = "Playlist konnte nicht erstellt werden.";
+            if ($is_ajax) {
+                echo json_encode(["success" => false, "message" => $msg]);
+            } else {
+                echo "<p>$msg</p>";
+            }
+            exit;
+        }
+    }
 
-
-       $result = apiPostRequest("playlists/{$playlist_id}/tracks", [
+    // 3. Track hinzufügen
+    $result = apiPostRequest("playlists/{$playlist_id}/tracks", [
         "uris" => [$track_uri],
         "position" => 0
     ]);
 
     if (isset($result['snapshot_id'])) {
-        echo "<p>Song wurde erfolgreich hinzugefügt!</p>";
+        if ($is_ajax) {
+            echo json_encode(["success" => true]);
+        } else {
+            echo "<p>✅ Song wurde hinzugefügt!</p>";
+            echo '<p><a href="?action=playlists">Zurück</a></p>';
+        }
     } else {
-        echo "<p>Fehler beim Hinzufügen des Songs.</p><pre>" . print_r($result, true) . "</pre>";
+        $msg = "Fehler beim Hinzufügen.";
+        if ($is_ajax) {
+            echo json_encode(["success" => false, "message" => $msg]);
+        } else {
+            echo "<p>$msg</p>";
+        }
     }
-    echo '<p><a href="?action=playlists">Zurück</a></p>';
+
     exit;
 }
+

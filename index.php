@@ -284,10 +284,8 @@ function addToBeatBuddy(trackId) {
                 <img id="albumCoverIMG" src="<?= $current_track['album']['images'][0]['url'] ?? 'default.jpg' ?>" 
                     alt="<?= htmlspecialchars($current_track['name']) ?>" 
                     width="200">
-                <br>
-                <p><strong><?= htmlspecialchars($current_track['name']) ?></strong></p>
-                <br>
-                <p><?= htmlspecialchars($current_track['artists'][0]['name']) ?></p>
+                
+                
                 <iframe src="https://open.spotify.com/embed/track/<?= $current_track['id'] ?>?autoplay=1"
                         width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>

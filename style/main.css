@@ -1,241 +1,96 @@
-/*** Globale Variablen ***/
-:root {
-    --black-color: #191414;  
-    --green-color: #1db954;
-    --pink-color: #ef4a75;
-    --white-color: #fffbf7;
-}
-
-/*** FONTS ***/
-.anton-regular { /*Text*/
-    font-family: "Anton", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-
-.ephesis-regular {
-font-family: "Ephesis", cursive;
-font-weight: 400;
-font-style: normal;
-}
-
-.jua-regular {
-    font-family: "Jua", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }  
-
-  @font-face { /* Headline */
-    font-family: 'SuperSpicy';
-    src: url('../font/Super\ Spicy\ Personal\ Use.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-  
-/*** ALLGEMEIN ***/
 body {
     overflow-x: hidden !important;
     font-family: Arial, sans-serif;
     background-color: var(--white-color);
     color: var(--black-color);
     text-align: center;
-    padding: 40px;
-    width: 375px;
+    padding: 5vh;
+    width: 100vw;
     margin: 0 auto;
-    
     height: 100vh;
 }
 
-
-
-/*** Headline TOP ***/
-#headlineTop image {
-    font-size: 2rem; /* Falls nötig anpassen */
-}
-
-/*** LOGO STYLING ***/
 #logoTop {
-    height: 3rem; /* Größe des Logos anpassen */
+    height: 4vh;
     width: auto;
 }
 
-
-#logoAll{
-    font-family: SuperSpicy;
-    display: flex;
-    align-items: center; /* Vertikale Zentrierung */
-    justify-content: center; /* Zentriert die Inhalte horizontal */
-    gap: 10px; /* Abstand zwischen den Elementen */
-}
-
 .container {
-    max-width: 800px;
+    max-width: 80vw;
     background: var(--black-color);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    padding: 2.5vh;
+    border-radius: 1.5vh;
+    box-shadow: 0 1vh 1.5vh rgba(0, 0, 0, 0.3);
     margin: auto;
     transition: transform 0.3s ease-in-out;
 }
 
-.container:hover {
-    transform: scale(1.02);
-}
-
-h1 {
-    color: var(--black-color);
-    font-size: 28px;
-    margin-bottom: 15px;
-}
-
-p, a {
-    font-size: 18px;
-    color: var(--black-color);
-    padding: 12px;
-    border-radius: 6px;
-    display: inline-block;
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--black-color);
-}
-
-/*** PLAYLIST-DESIGN ***/
-.playlist-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
 .playlist {
-    background: linear-gradient(135deg, var(--pink-color), var(--green-color));
-    color: var(--white-color);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    width: 220px;
-    text-align: center;
-}
-
-.playlist:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
-}
-
-.playlist h2 {
-    font-size: 20px;
-    margin: 0 0 10px;
+    padding: 2.5vh;
+    border-radius: 1.5vh;
+    box-shadow: 0 0.6vh 1.2vh rgba(0, 0, 0, 0.3);
+    width: 30vw;
 }
 
 .playlist p {
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 6px;
+    padding: 1.2vh;
+    border-radius: 0.8vh;
 }
 
-/*** Album Cover ***/
 #albumCoverIMG {
-    border-radius: 40px;
-    width: 304px;
-    height: 306px;
-    position: relative;
-    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 1);
+    border-radius: 5vh;
+    width: 40vw;
+    height: 41vh;
+    box-shadow: 0vh 0.3vh 0.6vh 0.1vh rgba(0, 0, 0, 1);
     object-fit: cover;
-} 
-
-/*** Heart Icons ***/
-#greenHeart {
-    scale: .2;
 }
 
-#redHeart {
-    scale: .2;
-}
-
-/*** Controls container ***/
 .controls {
     display: flex;
-    align-items: center; /* Optional: Aligns images vertically */
+    align-items: center;
     margin: 0;
 }
 
-.controls a{
+.controls a {
     margin: -20vh;
 }
 
-
 .backimg {
-    position: absolute;
-    max-width: 150px; /* Anpassen der Größe der Bilder */
+    max-width: 20vw;
     opacity: 0.7;
+    position: absolute;
 }
-
-/* Zufällige Positionierung am Rand */
-#backimg1 { display: none; }
-#backimg2 { display: none; }
-#backimg3 { display: none; }
-#backimg4 { display: none; }
-#backimg5 { display: none; }
 
 /* Swipe Mechanismus */
 .track-container {
-    position: relative;
-    width: 320px;
-    margin: 40px auto 20px auto;
-    background: #181818;
-    border-radius: 18px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    padding: 24px 10px 20px 10px;
-    text-align: center;
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
-    will-change: transform, opacity;
-    touch-action: pan-x;
-    user-select: none;
+    width: 42vw;
+    margin: 5vh auto 2.5vh auto;
+    border-radius: 2.4vh;
+    padding: 3vh 1.5vw 2.5vh 1.5vw;
 }
+
 .swipe-out-left {
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
-    transform: translateX(-500px) rotate(-25deg);
-    opacity: 0;
+    transform: translateX(-65vw) rotate(-25deg);
 }
+
 .swipe-out-right {
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
-    transform: translateX(500px) rotate(25deg);
-    opacity: 0;
+    transform: translateX(65vw) rotate(25deg);
 }
+
 .controls {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 10px 0 40px 0;
+    gap: 4vw;
+    margin: 1.5vh 0 5vh 0;
 }
+
 button#redHeart, button#greenHeart {
-    font-size: 1.2em;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-button#redHeart {
-    background: #ff4e4e;
-    color: #fff;
-}
-button#greenHeart {
-    background: #1db954;
-    color: #fff;
+    padding: 2vh 4vw;
+    border-radius: 5vw;
 }
 
 @media screen and (max-width: 480px) {
-    /* Zufällige Positionierung am Rand */
-    #backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); display: flex; }
-    #backimg2 { top: 6%; right: -10%; display: flex; }
-    #backimg3 { bottom: 50%; left: 85%; display: flex; }
-    #backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg); display: flex;}
-    #backimg5 { top: 0%; left: -10%; display: flex;}
-
+    #backimg1 { top: 85vh; left: 90vw; transform: translate(-50%, -50%); display: flex; }
+    #backimg2 { top: 6vh; right: -10vw; display: flex; }
+    #backimg3 { bottom: 50vh; left: 85vw; display: flex; }
+    #backimg4 { bottom: 0vh; right: 80vw; transform: rotate(-50deg); display: flex;}
+    #backimg5 { top: 0vh; left: -10vw; display: flex;}
 }

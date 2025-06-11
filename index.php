@@ -139,10 +139,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
     }
 
     $playlists = apiRequest('me/playlists');
+    foreach ($playlists['items'] as $playlist) {
+        if (strtolower($playlist['name']) === 'all genres, all decades') {
+            $playlistId = $playlist['id'];
+            header("Location: ?action=playlist&id=" . urlencode($playlistId));
+            exit;
+        }
+    }
 
     ?>
     <!DOCTYPE html>
-    <html lang="de">
+    < lang="de">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -154,19 +161,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
 
         <title>Deine Spotify Playlists</title>
     </head>
-    <body>
+    <>
      
-        <h1>Deine Playlists</h1>
-            <?php foreach ($playlists['items'] as $playlist): ?>
-                    <a href="?action=playlist&id=<?= $playlist['id'] ?>">
-                        <img src="<?= $playlist['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($playlist['name']) ?>" width="100">
-                        <?= htmlspecialchars($playlist['name']) ?>
-                    </a>
-                
-            <?php endforeach; ?>
+         <h1>Deine Playlists</h1>
+        <?php foreach ($playlists['items'] as $playlist): ?>
+            <a href="?action=playlist&id=<?= $playlist['id'] ?>">
+                <img src="<?= $playlist['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($playlist['name']) ?>" width="100">
+                <?= htmlspecialchars($playlist['name']) ?>
+            </a>
+        <?php endforeach; ?>
+        <button onclick="window.location.href='./PHP/logout.php'">Logout</button>
 
-            <!-- Button zum logout -->
-            <button onclick="window.location.href='./PHP/logout.php'">Logout</button>
     </body>
     </html>
     <?php

@@ -1,96 +1,289 @@
+/*** Globale Variablen ***/
+:root {
+    --black-color: #191414;  
+    --green-color: #1db954;
+    --pink-color: #ef4a75;
+    --white-color: #fffbf7;
+}
+
+/*** FONTS ***/
+.anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.ephesis-regular {
+    font-family: "Ephesis", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.jua-regular {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SuperSpicy';
+    src: url('../font/Super%20Spicy%20Personal%20Use.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*** ALLGEMEIN ***/
 body {
     overflow-x: hidden !important;
     font-family: Arial, sans-serif;
     background-color: var(--white-color);
     color: var(--black-color);
     text-align: center;
-    padding: 5vh;
-    width: 100vw;
+    padding: 40px;
+    max-width: 100%;
     margin: 0 auto;
     height: 100vh;
+    box-sizing: border-box;
 }
 
+/*** Headline TOP ***/
+#headlineTop image {
+    font-size: 2rem;
+}
+
+/*** LOGO STYLING ***/
 #logoTop {
-    height: 4vh;
+    height: 3rem;
     width: auto;
 }
 
+#logoAll {
+    font-family: 'SuperSpicy', cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/*** CONTAINER ***/
 .container {
-    max-width: 80vw;
+    max-width: 800px;
     background: var(--black-color);
-    padding: 2.5vh;
-    border-radius: 1.5vh;
-    box-shadow: 0 1vh 1.5vh rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     margin: auto;
     transition: transform 0.3s ease-in-out;
 }
 
+.container:hover {
+    transform: scale(1.02);
+}
+
+h1 {
+    color: var(--black-color);
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+p, a {
+    font-size: 18px;
+    color: var(--black-color);
+    padding: 12px;
+    border-radius: 6px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--black-color);
+}
+
+/*** PLAYLIST DESIGN ***/
+.playlist-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 .playlist {
-    padding: 2.5vh;
-    border-radius: 1.5vh;
-    box-shadow: 0 0.6vh 1.2vh rgba(0, 0, 0, 0.3);
-    width: 30vw;
+    background: linear-gradient(135deg, var(--pink-color), var(--green-color));
+    color: var(--white-color);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 220px;
+    text-align: center;
+}
+
+.playlist:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+}
+
+.playlist h2 {
+    font-size: 20px;
+    margin: 0 0 10px;
 }
 
 .playlist p {
-    padding: 1.2vh;
-    border-radius: 0.8vh;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 6px;
 }
 
+/*** Album Cover ***/
 #albumCoverIMG {
-    border-radius: 5vh;
-    width: 40vw;
-    height: 41vh;
-    box-shadow: 0vh 0.3vh 0.6vh 0.1vh rgba(0, 0, 0, 1);
+    border-radius: 40px;
+    width: 304px;
+    height: 306px;
+    position: relative;
+    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 1);
     object-fit: cover;
+} 
+
+/*** Heart Icons (Buttons) ***/
+button#greenHeart,
+button#redHeart {
+    font-size: 1.2em;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
+#redHeart{
+    position: relative;
+    width: 13vh;
+    z-index: 50;
+}
+#greenHeart{
+    position: relative;
+    width: 13vh;
+    z-index: 50;
+
+}
+
+button#redHeart {
+    background: #ff4e4e;
+    color: #fff;
+}
+
+button#greenHeart {
+    background: #1db954;
+    color: #fff;
+}
+
+/*** Controls (Herz Buttons Container) ***/
 .controls {
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin: 0;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 10px 0 40px 0;
 }
 
-.controls a {
-    margin: -20vh;
-}
-
+/*** Hintergrundbilder ***/
 .backimg {
-    max-width: 20vw;
-    opacity: 0.7;
     position: absolute;
+    max-width: 150px;
+    opacity: 0.7;
 }
 
-/* Swipe Mechanismus */
+/* Gemeinsame Styles für alle Hintergrundbilder */
+.backimg {
+    position: absolute;
+    width: 50vw; /* größere Größe */
+    height: auto;
+    z-index: -1; /* ganz im Hintergrund */
+    pointer-events: none; /* verhindert Klick-Interaktion */
+    user-select: none;
+}
+
+/* Individuelle Positionierung – zufällig verteilt */
+#backimg1 {
+    top: 10%;
+    left: 5%;
+    transform: rotate(15deg);
+}
+#backimg2 {
+    top: 30%;
+    right: 0%;
+    transform: rotate(-10deg);
+}
+#backimg3 {
+    bottom: 25%;
+    left: 15%;
+    transform: rotate(20deg);
+}
+#backimg4 {
+    bottom: 5%;
+    right: 10%;
+    transform: rotate(-30deg);
+}
+#backimg5 {
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(5deg);
+}
+
+
+/*** Swipe Mechanismus ***/
 .track-container {
-    width: 42vw;
-    margin: 5vh auto 2.5vh auto;
-    border-radius: 2.4vh;
-    padding: 3vh 1.5vw 2.5vh 1.5vw;
+    position: relative;
+    width: 320px;
+    margin: 40px auto 20px auto;
+    background: #181818;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    padding: 24px 10px 20px 10px;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+    will-change: transform, opacity;
+    touch-action: pan-x;
+    user-select: none;
 }
 
 .swipe-out-left {
-    transform: translateX(-65vw) rotate(-25deg);
+    transform: translateX(-500px) rotate(-25deg);
+    opacity: 0;
 }
 
 .swipe-out-right {
-    transform: translateX(65vw) rotate(25deg);
+    transform: translateX(500px) rotate(25deg);
+    opacity: 0;
 }
 
-.controls {
-    gap: 4vw;
-    margin: 1.5vh 0 5vh 0;
-}
+/*** Responsive Anpassungen ***/
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px 10px;
+    }
 
-button#redHeart, button#greenHeart {
-    padding: 2vh 4vw;
-    border-radius: 5vw;
+    .playlist {
+        width: 100%;
+    }
+
+    #albumCoverIMG {
+        width: 100%;
+        height: auto;
+    }
 }
 
 @media screen and (max-width: 480px) {
-    #backimg1 { top: 85vh; left: 90vw; transform: translate(-50%, -50%); display: flex; }
-    #backimg2 { top: 6vh; right: -10vw; display: flex; }
-    #backimg3 { bottom: 50vh; left: 85vw; display: flex; }
-    #backimg4 { bottom: 0vh; right: 80vw; transform: rotate(-50deg); display: flex;}
-    #backimg5 { top: 0vh; left: -10vw; display: flex;}
+    body {
+        overflow: hidden;
+    }
+    #backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); display: flex; }
+    #backimg2 { top: 6%; right: -10%; display: flex; }
+    #backimg3 { bottom: 50%; left: 85%; display: flex; }
+    #backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg); display: flex; }
+    #backimg5 { top: 0%; left: -10%; display: flex; };
 }

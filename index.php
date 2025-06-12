@@ -75,10 +75,10 @@ if (sizeof($_GET) == 0) {
 
         <title>Spotify App</title>
     </head>
-    <body>
-        <h1 id="logoAll">
+    <body id="bodylogin">
+        <h1 id="logoAllLogin">
             <div class="headlineTop">Beat</div>
-            <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">
+            <img src="./Design/Icons/logofafinalj.png" id="logoTopLogin" alt="" srcset="">
             <div class="headlineTop">Buddy</div>
         </h1>
         <p><a href="?action=login">Login mit Spotify</a></p>
@@ -153,7 +153,19 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/main.css">
+              <script>
+      let timestamp = new Date().getTime();
+      let link = document.createElement('link');
+      link.rel = 'stylesheet';
+      let script = document.createElement('script');
+      script.defer = true;
+
+      // relative path to your files
+      link.href = './style/main.css' + `?${timestamp}`;
+     
+      document.head.appendChild(link);
+      
+    </script>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -297,7 +297,7 @@ function addToBeatBuddy(trackId) {
 
             <!-- Buttons zum Swipen -->
              <div class="controls">
-                <a href="?action=playlist&id=<?= $playlist_id ?>&nav=prev"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
+                <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="redHeart" src="./Design/Icons/HeartRed.png" alt="redHeart"></a>
                 <a href="?action=playlist&id=<?= $playlist_id ?>&nav=next"><img id="greenHeart" src="./Design/Icons/HeartGreen.png" alt="greenHeart"></a>
             </div>
 
@@ -343,10 +343,10 @@ function addToBeatBuddy(trackId) {
                 trackBox.classList.add('swipe-out-left');
                 goToNext('next');
             } else if (currentX > 120) {
-    addToBeatBuddy('<?= $current_track['id'] ?>');
-    trackBox.classList.add('swipe-out-right');
-    goToNext('next');
-}
+                addToBeatBuddy('<?= $current_track['id'] ?>');
+                trackBox.classList.add('swipe-out-right');
+                goToNext('next');
+            }
  else {
                 trackBox.style.transform = '';
                 trackBox.style.opacity = '';
@@ -373,6 +373,7 @@ function addToBeatBuddy(trackId) {
                 trackBox.classList.add('swipe-out-left');
                 goToNext('next');
             } else if (currentX > 120) {
+                addToBeatBuddy('<?= $current_track['id'] ?>'); // call your function
                 trackBox.classList.add('swipe-out-right');
                 goToNext('next');
             } else {
@@ -388,10 +389,10 @@ function addToBeatBuddy(trackId) {
                 goToNext('next');
             });
           greenHeart.addEventListener('click', () => {
-    addToBeatBuddy('<?= $current_track['id'] ?>'); // call your function
-    trackBox.classList.add('swipe-out-right');
-    goToNext('next');
-});
+                addToBeatBuddy('<?= $current_track['id'] ?>'); // call your function
+                trackBox.classList.add('swipe-out-right');
+                goToNext('next');
+            });
 
         </script>
 

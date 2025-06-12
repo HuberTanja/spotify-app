@@ -75,15 +75,18 @@ if (sizeof($_GET) == 0) {
 
         <title>Spotify App</title>
     </head>
-    <body id="bodylogin">
+   <body id="bodylogin">
+    <div class="boxLogin">
         <h1 id="logoAllLogin">
             <div class="headlineTop">Beat</div>
-            <img src="./Design/Icons/logofafinalj.png" id="logoTopLogin" alt="" srcset="">
+            <img src="./Design/Icons/logofafinalj.png" id="logoTopLogin" alt="Logo">
             <div class="headlineTop">Buddy</div>
         </h1>
-        <p><a href="?action=login">Login mit Spotify</a></p>
+        <p><a href="?action=login" class="loginButton">Login</a></p>
 
-    </body>
+    </div>
+</body>
+
     </html>
     <?php
     exit;
@@ -176,6 +179,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
     <>
      
          <h1>Deine Playlists</h1>
+        
         <?php foreach ($playlists['items'] as $playlist): ?>
             <a href="?action=playlist&id=<?= $playlist['id'] ?>">
                 <img src="<?= $playlist['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($playlist['name']) ?>" width="100">
@@ -246,7 +250,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     
          return json_decode($response, true);
      }
-     $current_track = $tracks[$_SESSION['track_index']]['track'];
+    $random_index = array_rand($tracks);
+    $current_track = $tracks[$random_index]['track'];
      ?>
 
     <!DOCTYPE html>
@@ -268,6 +273,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <img class="backimg" id="backimg4" src="./Design/bgIMG/back4.png" alt="" srcset="">
         <img class="backimg" id="backimg5" src="./Design/bgIMG/back5.png" alt="" srcset="">
 
+        <a href="./PHP/logout.php"> <img src="./style/icon-park--logout.svg" alt="Logout" class="logoutIcon"></a>
         <h1 id="logoAll">
             <div class="headlineTop">Beat</div>
             <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">

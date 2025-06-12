@@ -66,6 +66,18 @@ body {
     justify-content: center;
     gap: 10px;
 }
+#logoAllLogin{
+    font-family: 'SuperSpicy', cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 4.5vw;
+}
+#logoTopLogin{
+    height: 6rem;
+    width: auto;
+}
 
 /*** CONTAINER ***/
 .container {

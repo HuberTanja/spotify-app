@@ -295,6 +295,11 @@ button#greenHeart {
 }
 
 /*** Hintergrundbilder ***/
+.backimg {
+    position: absolute;
+    max-width: 150px;
+    opacity: 0.7;
+}
 
 /* Gemeinsame Styles für alle Hintergrundbilder */
 .backimg {

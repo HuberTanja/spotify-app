@@ -35,6 +35,7 @@
 /*** ALLGEMEIN ***/
 body {
     overflow-x: hidden !important;
+    overflow-y: hidden !important;
     font-family: Arial, sans-serif;
     background-color: var(--white-color);
     color: var(--black-color);

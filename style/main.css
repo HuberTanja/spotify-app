@@ -295,11 +295,6 @@ button#greenHeart {
 }
 
 /*** Hintergrundbilder ***/
-.backimg {
-  position: absolute;
-  max-width: 150px;
-  opacity: 0.7;
-}
 
 /* Gemeinsame Styles für alle Hintergrundbilder */
 .backimg {
@@ -313,6 +308,7 @@ button#greenHeart {
 
 /* Individuelle Positionierung – zufällig verteilt */
 #backimg1 {
+
   top: 10%;
   left: 5%;
   transform: rotate(15deg);
@@ -382,9 +378,7 @@ button#greenHeart {
 }
 
 @media screen and (max-width: 480px) {
-  body {
-    overflow: hidden;
-  }
+
   #backimg1 {
     top: 85%;
     left: 90%;
@@ -428,4 +422,15 @@ button#greenHeart {
 .logoutIcon:hover {
     transform: scale(1.2);
     opacity: 0.8;
+
+    html, body {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+    }
+    #backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); display: flex; }
+    #backimg2 { top: 6%; right: -10%; display: flex; }
+    #backimg3 { bottom: 50%; left: 85%; display: flex; }
+    #backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg); display: flex; }
+    #backimg5 { top: 0%; left: 10%; display: flex; };
+
 }

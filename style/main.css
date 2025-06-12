@@ -40,7 +40,7 @@ body {
   background-color: var(--white-color);
   color: var(--black-color);
   text-align: center;
-  padding: 40px;
+  padding: 5px;
   max-width: 100%;
   margin: 0 auto;
   height: 100vh;
@@ -412,4 +412,20 @@ button#greenHeart {
     left: -10%;
     display: flex;
   }
+}
+
+.logoutIcon {
+       position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    width: 57px;
+    height: 37px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.logoutIcon:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
 }

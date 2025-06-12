@@ -179,6 +179,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlists') {
     <>
      
          <h1>Deine Playlists</h1>
+        
         <?php foreach ($playlists['items'] as $playlist): ?>
             <a href="?action=playlist&id=<?= $playlist['id'] ?>">
                 <img src="<?= $playlist['images'][0]['url'] ?? 'default.jpg' ?>" alt="<?= htmlspecialchars($playlist['name']) ?>" width="100">
@@ -271,6 +272,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
         <img class="backimg" id="backimg4" src="./Design/bgIMG/back4.png" alt="" srcset="">
         <img class="backimg" id="backimg5" src="./Design/bgIMG/back5.png" alt="" srcset="">
 
+        <a href="./PHP/logout.php"> <img src="./style/icon-park--logout.svg" alt="Logout" class="logoutIcon"></a>
         <h1 id="logoAll">
             <div class="headlineTop">Beat</div>
             <img src="./Design/Icons/logofafinalj.png" id="logoTop" alt="" srcset="">

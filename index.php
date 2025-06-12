@@ -250,7 +250,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'playlist') {
     
          return json_decode($response, true);
      }
-     $current_track = $tracks[$_SESSION['track_index']]['track'];
+    $random_index = array_rand($tracks);
+    $current_track = $tracks[$random_index]['track'];
      ?>
 
     <!DOCTYPE html>

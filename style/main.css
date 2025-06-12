@@ -193,15 +193,14 @@ button#greenHeart {
 /*** Hintergrundbilder ***/
 .backimg {
     position: absolute;
-    max-width: 150px;
     opacity: 0.7;
 }
 
 /* Gemeinsame Styles für alle Hintergrundbilder */
 .backimg {
     position: absolute;
-    width: 50vw; /* größere Größe */
     height: auto;
+    width: 10%;
     z-index: -1; /* ganz im Hintergrund */
     pointer-events: none; /* verhindert Klick-Interaktion */
     user-select: none;
@@ -209,29 +208,38 @@ button#greenHeart {
 
 /* Individuelle Positionierung – zufällig verteilt */
 #backimg1 {
-    top: 10%;
-    left: 5%;
+    top: -10%;
+    left: -15%;
     transform: rotate(15deg);
+    width: 40%; /* größere Größe */
+
 }
 #backimg2 {
-    top: 30%;
-    right: 0%;
+    top: -10%;
+    right: -5%;
     transform: rotate(-10deg);
+    width: 30%; /* größere Größe */
+
 }
 #backimg3 {
     bottom: 25%;
     left: 15%;
     transform: rotate(20deg);
+    width: 20%; /* größere Größe */
 }
 #backimg4 {
     bottom: 5%;
-    right: 10%;
+    right: -5%;
     transform: rotate(-30deg);
+    width: 30%; /* größere Größe */
+
 }
 #backimg5 {
-    top: 60%;
+    top: 100%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(5deg);
+    width: 30%; /* größere Größe */
+
 }
 
 
@@ -279,12 +287,13 @@ button#greenHeart {
 }
 
 @media screen and (max-width: 480px) {
-    body {
-        overflow: hidden;
+    html, body {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
     }
     #backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); display: flex; }
     #backimg2 { top: 6%; right: -10%; display: flex; }
     #backimg3 { bottom: 50%; left: 85%; display: flex; }
     #backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg); display: flex; }
-    #backimg5 { top: 0%; left: -10%; display: flex; };
+    #backimg5 { top: 0%; left: 10%; display: flex; };
 }

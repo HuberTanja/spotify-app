@@ -81,7 +81,7 @@ if (sizeof($_GET) == 0) {
             <img src="./Design/Icons/logofafinalj.png" id="logoTopLogin" alt="" srcset="">
             <div class="headlineTop">Buddy</div>
         </h1>
-        <p><a href="?action=login">Login mit Spotify</a></p>
+        <p><a href="?action=login">Login</a></p>
 
     </body>
     </html>

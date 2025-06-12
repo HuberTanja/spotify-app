@@ -75,15 +75,18 @@ if (sizeof($_GET) == 0) {
 
         <title>Spotify App</title>
     </head>
-    <body id="bodylogin">
+   <body id="bodylogin">
+    <div class="boxLogin">
         <h1 id="logoAllLogin">
             <div class="headlineTop">Beat</div>
-            <img src="./Design/Icons/logofafinalj.png" id="logoTopLogin" alt="" srcset="">
+            <img src="./Design/Icons/logofafinalj.png" id="logoTopLogin" alt="Logo">
             <div class="headlineTop">Buddy</div>
         </h1>
-        <p><a href="?action=login">Login</a></p>
+        <p><a href="?action=login" class="loginButton">Login</a></p>
 
-    </body>
+    </div>
+</body>
+
     </html>
     <?php
     exit;

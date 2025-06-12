@@ -1,303 +1,415 @@
 /*** Globale Variablen ***/
 :root {
-    --black-color: #191414;  
-    --green-color: #1db954;
-    --pink-color: #ef4a75;
-    --white-color: #fffbf7;
+  --black-color: #191414;
+  --green-color: #1db954;
+  --pink-color: #ef4a75;
+  --white-color: #fffbf7;
 }
 
 /*** FONTS ***/
 .anton-regular {
-    font-family: "Anton", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .ephesis-regular {
-    font-family: "Ephesis", cursive;
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Ephesis', cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .jua-regular {
-    font-family: "Jua", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Jua', sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'SuperSpicy';
-    src: url('../font/Super%20Spicy%20Personal%20Use.ttf');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'SuperSpicy';
+  src: url('../font/Super%20Spicy%20Personal%20Use.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /*** ALLGEMEIN ***/
 body {
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
-    font-family: Arial, sans-serif;
-    background-color: var(--white-color);
-    color: var(--black-color);
-    text-align: center;
-    padding: 40px;
-    max-width: 100%;
-    margin: 0 auto;
-    height: 100vh;
-    box-sizing: border-box;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  font-family: Arial, sans-serif;
+  background-color: var(--white-color);
+  color: var(--black-color);
+  text-align: center;
+  padding: 40px;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  box-sizing: border-box;
+}
+/* Body nimmt die volle Fläche ein */
+#bodylogin {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url('./Unbenannt-5.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Die Box soll leicht durchsichtig weiß sein */
+.boxLogin {
+  background-color: rgba(255, 255, 255, 0.86);
+  padding: 23vw;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.loginButton {
+  display: inline-block;
+  background: #ef4a75;
+  background: linear-gradient(
+    90deg,
+    rgba(239, 74, 117, 1) 21%,
+    rgba(29, 185, 84, 1) 81%
+  );
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-right: 3.5vw;
+  animation: pulse 2s infinite;
+  transition: background-color 0.3s ease;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 119, 204, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 119, 204, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 119, 204, 0.4);
+  }
+}
+
+.loginButton:hover {
+  background-color: #005fa3;
+  transform: scale(1.05);
+}
+@media (max-width: 600px) {
+  .loginButton {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+#logoTopLogin {
+  width: 100px;
+  height: auto;
+  margin: 1vw 0;
+}
+
+/* Responsive: passt sich an kleinere Bildschirme an */
+@media (max-width: 600px) {
+  .boxLogin {
+    padding: 100vw;
+    width: 95%;
+  }
+
+  .headlineTop {
+    font-size: 2.5rem;
+  }
+
+  #logoTopLogin {
+    width: 80px;
+  }
+}
 
 /*** Headline TOP ***/
 #headlineTop image {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 /*** LOGO STYLING ***/
 #logoTop {
-    height: 3rem;
-    width: auto;
+  height: 3rem;
+  width: auto;
 }
 
 #logoAll {
-    font-family: 'SuperSpicy', cursive;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  font-family: 'SuperSpicy', cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
-#logoAllLogin{
-    font-family: 'SuperSpicy', cursive;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 4.5vw;
+#logoAllLogin {
+  font-family: 'SuperSpicy', cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 4.5vw;
 }
-#logoTopLogin{
-    height: 6rem;
-    width: auto;
+#logoTopLogin {
+  height: 6rem;
+  width: auto;
 }
 
 /*** CONTAINER ***/
 .container {
-    max-width: 800px;
-    background: var(--black-color);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    margin: auto;
-    transition: transform 0.3s ease-in-out;
+  max-width: 800px;
+  background: var(--black-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  margin: auto;
+  transition: transform 0.3s ease-in-out;
 }
 
 .container:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 h1 {
-    color: var(--black-color);
-    font-size: 28px;
-    margin-bottom: 15px;
+  color: var(--black-color);
+  font-size: 28px;
+  margin-bottom: 15px;
 }
 
-p, a {
-    font-size: 18px;
-    color: var(--black-color);
-    padding: 12px;
-    border-radius: 6px;
-    display: inline-block;
-    text-decoration: none;
+p,
+a {
+  font-size: 18px;
+  color: var(--black-color);
+  padding: 12px;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
 }
 
 a:hover {
-    color: var(--black-color);
+  color: var(--black-color);
 }
 
 /*** PLAYLIST DESIGN ***/
 .playlist-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .playlist {
-    background: linear-gradient(135deg, var(--pink-color), var(--green-color));
-    color: var(--white-color);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    width: 220px;
-    text-align: center;
+  background: linear-gradient(135deg, var(--pink-color), var(--green-color));
+  color: var(--white-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 220px;
+  text-align: center;
 }
 
 .playlist:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
 }
 
 .playlist h2 {
-    font-size: 20px;
-    margin: 0 0 10px;
+  font-size: 20px;
+  margin: 0 0 10px;
 }
 
 .playlist p {
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 6px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 6px;
 }
 
 /*** Album Cover ***/
 #albumCoverIMG {
-    border-radius: 40px;
-    width: 304px;
-    height: 306px;
-    position: relative;
-    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 1);
-    object-fit: cover;
-} 
+  border-radius: 40px;
+  width: 304px;
+  height: 306px;
+  position: relative;
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 1);
+  object-fit: cover;
+}
 
 /*** Heart Icons (Buttons) ***/
 button#greenHeart,
 button#redHeart {
-    font-size: 1.2em;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.2s;
+  font-size: 1.2em;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-#redHeart{
-    position: relative;
-    width: 13vh;
-    z-index: 50;
+#redHeart {
+  position: relative;
+  width: 13vh;
+  z-index: 50;
 }
-#greenHeart{
-    position: relative;
-    width: 13vh;
-    z-index: 50;
-
+#greenHeart {
+  position: relative;
+  width: 13vh;
+  z-index: 50;
 }
 
 button#redHeart {
-    background: #ff4e4e;
-    color: #fff;
+  background: #ff4e4e;
+  color: #fff;
 }
 
 button#greenHeart {
-    background: #1db954;
-    color: #fff;
+  background: #1db954;
+  color: #fff;
 }
 
 /*** Controls (Herz Buttons Container) ***/
 .controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin: 10px 0 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 10px 0 40px 0;
 }
 
 /*** Hintergrundbilder ***/
 .backimg {
-    position: absolute;
-    max-width: 150px;
-    opacity: 0.7;
+  position: absolute;
+  max-width: 150px;
+  opacity: 0.7;
 }
 
 /* Gemeinsame Styles für alle Hintergrundbilder */
 .backimg {
-    position: absolute;
-    width: 50vw; /* größere Größe */
-    height: auto;
-    z-index: -1; /* ganz im Hintergrund */
-    pointer-events: none; /* verhindert Klick-Interaktion */
-    user-select: none;
+  position: absolute;
+  width: 50vw; /* größere Größe */
+  height: auto;
+  z-index: -1; /* ganz im Hintergrund */
+  pointer-events: none; /* verhindert Klick-Interaktion */
+  user-select: none;
 }
 
 /* Individuelle Positionierung – zufällig verteilt */
 #backimg1 {
-    top: 10%;
-    left: 5%;
-    transform: rotate(15deg);
+  top: 10%;
+  left: 5%;
+  transform: rotate(15deg);
 }
 #backimg2 {
-    top: 30%;
-    right: 0%;
-    transform: rotate(-10deg);
+  top: 30%;
+  right: 0%;
+  transform: rotate(-10deg);
 }
 #backimg3 {
-    bottom: 25%;
-    left: 15%;
-    transform: rotate(20deg);
+  bottom: 25%;
+  left: 15%;
+  transform: rotate(20deg);
 }
 #backimg4 {
-    bottom: 5%;
-    right: 10%;
-    transform: rotate(-30deg);
+  bottom: 5%;
+  right: 10%;
+  transform: rotate(-30deg);
 }
 #backimg5 {
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(5deg);
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(5deg);
 }
-
 
 /*** Swipe Mechanismus ***/
 .track-container {
-    position: relative;
-    width: 320px;
-    margin: 40px auto 20px auto;
-    background: #181818;
-    border-radius: 18px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    padding: 24px 10px 20px 10px;
-    text-align: center;
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
-    will-change: transform, opacity;
-    touch-action: pan-x;
-    user-select: none;
+  position: relative;
+  width: 320px;
+  margin: 40px auto 20px auto;
+  background: #181818;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 24px 10px 20px 10px;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+  will-change: transform, opacity;
+  touch-action: pan-x;
+  user-select: none;
 }
 
 .swipe-out-left {
-    transform: translateX(-500px) rotate(-25deg);
-    opacity: 0;
+  transform: translateX(-500px) rotate(-25deg);
+  opacity: 0;
 }
 
 .swipe-out-right {
-    transform: translateX(500px) rotate(25deg);
-    opacity: 0;
+  transform: translateX(500px) rotate(25deg);
+  opacity: 0;
 }
 
 /*** Responsive Anpassungen ***/
 @media screen and (max-width: 768px) {
-    .container {
-        width: 90%;
-        padding: 20px 10px;
-    }
+  .container {
+    width: 90%;
+    padding: 20px 10px;
+  }
 
-    .playlist {
-        width: 100%;
-    }
+  .playlist {
+    width: 100%;
+  }
 
-    #albumCoverIMG {
-        width: 100%;
-        height: auto;
-    }
+  #albumCoverIMG {
+    width: 100%;
+    height: auto;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    body {
-        overflow: hidden;
-    }
-    #backimg1 { top: 85%; left: 90%; transform: translate(-50%, -50%); display: flex; }
-    #backimg2 { top: 6%; right: -10%; display: flex; }
-    #backimg3 { bottom: 50%; left: 85%; display: flex; }
-    #backimg4 { bottom: 0%; right: 80%; transform: rotate(-50deg); display: flex; }
-    #backimg5 { top: 0%; left: -10%; display: flex; };
+  body {
+    overflow: hidden;
+  }
+  #backimg1 {
+    top: 85%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    display: flex;
+  }
+  #backimg2 {
+    top: 6%;
+    right: -10%;
+    display: flex;
+  }
+  #backimg3 {
+    bottom: 50%;
+    left: 85%;
+    display: flex;
+  }
+  #backimg4 {
+    bottom: 0%;
+    right: 80%;
+    transform: rotate(-50deg);
+    display: flex;
+  }
+  #backimg5 {
+    top: 0%;
+    left: -10%;
+    display: flex;
+  }
 }

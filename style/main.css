@@ -312,33 +312,33 @@ button#greenHeart {
 
 /* Individuelle Positionierung – zufällig verteilt */
 #backimg1 {
-  width: 45vw;
+  width: 37vw;
   top: -20%;
   left: -15%;
   transform: rotate(15deg);
 }
 #backimg2 {
-      width: 20vw;
+      width: 18vw;
 
   top: -10%;
   right: -3.5%;
   transform: rotate(-10deg);
 }
 #backimg3 {
-      width: 18vw;
+      width: 15vw;
   bottom: 2%;
   left: 15%;
   transform: rotate(20deg);
 }
 #backimg4 {
-      width: 30vw;
+      width: 23vw;
 
   bottom: 5%;
   right: -10%;
   transform: rotate(-30deg);
 }
 #backimg5 {
-      width: 20vw;
+      width: 18vw;
     
   top: 90%;
   left: 70%;
